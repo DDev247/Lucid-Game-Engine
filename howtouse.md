@@ -15,12 +15,12 @@
  # Step 7. 
  Click the "play" button next to the Debug|Any CPU and it can throw an error but don't worry about it. We will fix it.
  # Step 8. 
- Fixing the broken thing: go to the bin/Debug/net----/ and create a folder named "assets" and there create a new text file and name it "settings.adp" and open it with notepad
+ Fixing the broken thing: go to the bin/Debug/net----/ and create a folder named "assets" and there create a new text file and name it "settings.adp" and open it with notepad++
  # Step 9. 
  Write the following text to the file:
  "800
  600
  True
- Lucid Example" or download the file from https://github.com/DDev247/Lucid-Game-Engine/blob/main/settings.adp
+ Lucid Example" AND remember to go to File>line ending conversion(or something like that idk) and convert to Unix (LF) line endings, or download the file from https://github.com/DDev247/Lucid-Game-Engine/blob/main/settings.adp
  # Step 10. 
  Relaunch the app from VS or double click the .exe file
