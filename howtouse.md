@@ -12,4 +12,5 @@
  "800
  600
  True
- Lucid Example" or download the file from 
+ Lucid Example" or download the file from https://github.com/DDev247/Lucid-Game-Engine/blob/main/settings.adp
+ Step 10. Relaunch the app from VS or double click the .exe file
