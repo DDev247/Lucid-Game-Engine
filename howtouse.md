@@ -1,4 +1,4 @@
-#Step by step tutorial for using the Lucid Game Engine
+# Step by step tutorial for using the Lucid Game Engine
  Step 1. Download all the files from https://github.com/DDev247/Lucid-Game-Engine/tree/main/Lucid%20Game%20Engine/bin/Debug/net6.0-windows
  Step 2. Make a WPF C# project
  Step 3. Create a folder in the project's folder
