@@ -7,6 +7,6 @@
         mc:Ignorable="d"
         Title="Debugger" Height="450" Width="800">
     <Grid>
-        <ListBox x:Name="listBox" FontFamily="Open Sans"/>
+        <ListBox x:Name="listBox" FontFamily="Trebuchet MS"/>
     </Grid>
 </Window>

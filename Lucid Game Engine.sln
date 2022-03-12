@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid Game Engine", "Lucid Game Engine\Lucid Game Engine.csproj", "{6C33D47A-6AF7-4FC9-88BA-DB5FAE3D7061}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LucidWrapper", "LucidWrapper\LucidWrapper.csproj", "{D987A7F3-A0EA-438E-A5C4-5AC30D0AEBF1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid Wrapper", "LucidWrapper\Lucid Wrapper.csproj", "{D987A7F3-A0EA-438E-A5C4-5AC30D0AEBF1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid Example Project", "Lucid Example Project\Lucid Example Project.csproj", "{79EA4965-8EB1-434E-90FE-BF33910B7DD3}"
 EndProject
