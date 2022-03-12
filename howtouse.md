@@ -1,4 +1,4 @@
-# Step by step tutorial for using the Lucid Game Engine
+# Installing it manually
  # Step 1. 
  Download all the files from https://github.com/DDev247/Lucid-Game-Engine/tree/main/Lucid%20Game%20Engine/bin/Debug/net6.0-windows
  # Step 2. 
@@ -24,3 +24,6 @@
  Lucid Example" AND remember to go to File>line ending conversion(or something like that idk) and convert to Unix (LF) line endings, or download the file from https://github.com/DDev247/Lucid-Game-Engine/blob/main/settings.adp
  # Step 10. 
  Relaunch the app from VS or double click the .exe file
+# Installing it with the wrapper
+ # Step 1
+ Download the wrapper from
