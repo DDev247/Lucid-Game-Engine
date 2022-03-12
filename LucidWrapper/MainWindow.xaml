@@ -1,0 +1,26 @@
+﻿<Window x:Class="LucidWrapper.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LucidWrapper"
+        mc:Ignorable="d"
+        Title="Lucid GE Wrapper" Height="500" Width="800"
+        Background="DarkSlateGray">
+    <Grid>
+
+        <TextBlock x:Name="TitleBlock" Foreground="White" Text="Lucid Game Engine Wrapper" FontSize="32" FontFamily="Open Sans" Margin="0,10,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+        <TextBox x:Name="ProjectLocationBox" Foreground="White" Background="Gray" Text="Project Location" CaretBrush="AliceBlue" FontSize="20" FontFamily="Open Sans" Margin="0,80,0,0" Height="30" Width="600" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <TextBox x:Name="SubFolderNameBox" Foreground="White" Background="Gray" Text="DLL Subfolder Name" CaretBrush="AliceBlue" FontSize="20" FontFamily="Open Sans" Margin="0,120,0,0" Height="30" Width="600" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <TextBox x:Name="CustomURLBox" Foreground="White" Background="Gray" Text="Custom Download URL*" CaretBrush="AliceBlue" FontSize="20" FontFamily="Open Sans" Margin="0,160,0,0" Height="30" Width="600" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+        <Button x:Name="GoButton" Foreground="White" Background="DarkSeaGreen" Content="Go" FontSize="32" FontFamily="Open Sans" Margin="0,240,0,0" Height="100" Width="500" HorizontalAlignment="Center" VerticalAlignment="Top" Click="GoButton_Click"/>
+
+        <ProgressBar x:Name="DownloadBar" Foreground="LimeGreen" Margin="0,360,0,0" Height="25" Width="400" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+        <TextBlock x:Name="WarningBlock" Foreground="White" Text="" FontSize="20" FontFamily="Open Sans" Margin="10,0,0,40" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+        <TextBlock x:Name="CustomURLBlock" Foreground="White" Text="*Leave blank if you don't use a custom service or something" FontSize="20" FontFamily="Open Sans" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+
+    </Grid>
+</Window>
