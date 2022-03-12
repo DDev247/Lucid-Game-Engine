@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid Game Engine", "Lucid 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LucidWrapper", "LucidWrapper\LucidWrapper.csproj", "{D987A7F3-A0EA-438E-A5C4-5AC30D0AEBF1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid Example Project", "Lucid Example Project\Lucid Example Project.csproj", "{79EA4965-8EB1-434E-90FE-BF33910B7DD3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{D987A7F3-A0EA-438E-A5C4-5AC30D0AEBF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D987A7F3-A0EA-438E-A5C4-5AC30D0AEBF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D987A7F3-A0EA-438E-A5C4-5AC30D0AEBF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79EA4965-8EB1-434E-90FE-BF33910B7DD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79EA4965-8EB1-434E-90FE-BF33910B7DD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79EA4965-8EB1-434E-90FE-BF33910B7DD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79EA4965-8EB1-434E-90FE-BF33910B7DD3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

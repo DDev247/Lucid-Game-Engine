@@ -1,0 +1,7 @@
+Log file for the Lucid Game Engine saved at: 12.3.2022-13.40.34.644/637826892346447409
+[ Engine.WindowManager ] @12.3.2022-13.32.56.362/637826887763621174 [ INFO ] Focus restored
+[ Engine.WindowManager ] @12.3.2022-13.32.56.470/637826887764702094 [ INFO ] The Main Window was loaded.
+[ Engine.WindowManager ] @12.3.2022-13.33.1.545/637826887815453753 [ INFO ] Focus lost
+[ Engine.WindowManager ] @12.3.2022-13.40.33.505/637826892335053999 [ INFO ] Focus restored
+[ Engine.WindowManager ] @12.3.2022-13.40.34.610/637826892346105165 [ INFO ] The Main Window was closed.
+[ Engine.MainInteraction.SaveLogs() ] @12.3.2022-13.40.34.644/637826892346447305 [ WARN ] Saving Logs...

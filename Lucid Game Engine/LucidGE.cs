@@ -68,12 +68,51 @@ namespace LucidGE
 
             private static void Window_Closed(object? sender, EventArgs e)
             {
+                InternalDebugger.Log("Engine.WindowManager", 0, "The Main Window was closed.");
+
                 Data.Data.DebugWindow.Close();
+
+                SaveLogs();
             }
 
             private static void Window_LoadedWindow(object? sender, RoutedEventArgs e)
             {
+                InternalDebugger.Log("Engine.WindowManager", 0, "The Main Window was loaded.");
+            }
 
+            public static void SaveLogs()
+            {
+                Debug.Log("Engine.MainInteraction.SaveLogs()", "Saving Logs...");
+                // Saving Debug Logs
+                string fileDir = Environment.CurrentDirectory + @"\debugLog.txt";
+                string toSave = "";
+
+                string Date = DateTime.Now.Day + "." + DateTime.Now.Month + "." + DateTime.Now.Year;
+                string Time = DateTime.Now.Hour + "." + DateTime.Now.Minute + "." + DateTime.Now.Second + "." + DateTime.Now.Millisecond + "/" + DateTime.Now.Ticks;
+                toSave += "Log file for the Lucid Game Engine saved at: " + Date + "-" + Time + "\n";
+
+                foreach (Log log in Data.Data.DebugLogs)
+                {
+                    toSave += log.ToString() + Environment.NewLine;
+                }
+
+                File.WriteAllText(fileDir, toSave);
+
+                InternalDebugger.Log("Engine.MainInteraction.SaveLogs()", 1, "Saving Logs...");
+                // Saving Internal Logs
+                fileDir = Environment.CurrentDirectory + @"\internalLog.txt";
+                toSave = "";
+
+                Date = DateTime.Now.Day + "." + DateTime.Now.Month + "." + DateTime.Now.Year;
+                Time = DateTime.Now.Hour + "." + DateTime.Now.Minute + "." + DateTime.Now.Second + "." + DateTime.Now.Millisecond + "/" + DateTime.Now.Ticks;
+                toSave += "Log file for the Lucid Game Engine saved at: " + Date + "-" + Time + "\n";
+
+                foreach (InternalLog log in InternalData.DebugLogs)
+                {
+                    toSave += log.ToString() + Environment.NewLine;
+                }
+
+                File.WriteAllText(fileDir, toSave);
             }
 
             private static void ApplySettings(Settings settings)
@@ -91,13 +130,13 @@ namespace LucidGE
                 while (true)
                 {
                     Data.Data.focused = IsApplicationActive();
-                    focusVol();
+                    focusCheck();
                     await Task.Delay(1);
                 }
             }
 
             static bool lastFocus;
-            static void focusVol()
+            static void focusCheck()
             {
                 if (lastFocus != Data.Data.focused)
                 {
@@ -105,13 +144,13 @@ namespace LucidGE
                     if (lastFocus == false && Data.Data.focused == true)
                     {
                         lastFocus = Data.Data.focused;
-                        Debug.Log("Engine.WindowManager", "Focus restored");
+                        Debug.Log("Engine.MainInteraction.focusCheck()", "Focus restored");
                         InternalDebugger.Log("Engine.WindowManager", 0, "Focus restored");
                     }
                     else if (lastFocus == true && Data.Data.focused == false)
                     {
                         lastFocus = Data.Data.focused;
-                        Debug.Log("Engine.WindowManager", "Focus lost");
+                        Debug.Log("Engine.MainInteraction.focusCheck()", "Focus lost");
                         InternalDebugger.Log("Engine.WindowManager", 0, "Focus lost");
                     }
                 }
@@ -147,7 +186,7 @@ namespace LucidGE
             public static Window? GEWindow;
             public static Settings? GESettings;
 
-            public static List<Log> DebugLogs = new();
+            public static List<InternalLog> DebugLogs = new();
         }
 
         /// <summary>
@@ -178,18 +217,20 @@ namespace LucidGE
         {
             public static void Init()
             {
-                InternalData.DebugLogs = new List<Log>();
+                InternalData.DebugLogs = new List<InternalLog>();
             }
 
             public static void Log(string source, int severity, string content)
             {
-                Log add = new(source, severity, content);
+                InternalLog add = new(source, severity, content);
                 InternalData.DebugLogs.Add(add);
             }
+
+            
         }
 
         /// <summary>
-        /// The Internal Debugger used to log stuff.
+        /// The Debugger used to log stuff.
         /// </summary>
         public static class Debug
         {
@@ -279,6 +320,55 @@ namespace LucidGE
                 string output;
 
                 output = "[ " + Source + " ] [ " + Sever() + " ] " + Content;
+
+                return output;
+            }
+        }
+
+        [Serializable]
+        internal class InternalLog
+        {
+            public string Source;
+            public int Severity = 0; // 0- normal, 1- warning, 2- error
+            public string Content = "";
+
+            public string Date;
+            public string Time;
+
+            public InternalLog(string source, int severity, string content)
+            {
+                Source = source;
+                Severity = severity;
+                Content = content;
+                Date = DateTime.Now.Day + "." + DateTime.Now.Month + "." + DateTime.Now.Year;
+                Time = DateTime.Now.Hour + "." + DateTime.Now.Minute + "." + DateTime.Now.Second + "." + DateTime.Now.Millisecond + "/" + DateTime.Now.Ticks;
+            }
+
+            private string Sever()
+            {
+                string output;
+
+                if (Severity == 0)
+                {
+                    output = "INFO";
+                }
+                else if (Severity == 1)
+                {
+                    output = "WARN";
+                }
+                else
+                {
+                    output = "ERR";
+                }
+
+                return output;
+            }
+
+            public override string ToString()
+            {
+                string output;
+
+                output = "[ " + Source + " ] @" + Date + "-" + Time + " [ " + Sever() + " ] " + Content;
 
                 return output;
             }

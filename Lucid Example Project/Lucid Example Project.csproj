@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <RootNamespace>Lucid_Example_Project</RootNamespace>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="Lucid Game Engine">
+      <HintPath>..\Lucid Game Engine\bin\Debug\net6.0-windows\Lucid Game Engine.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
