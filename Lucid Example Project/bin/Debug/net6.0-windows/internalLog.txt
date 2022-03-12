@@ -1,6 +1,11 @@
-Log file for the Lucid Game Engine saved at: 12.3.2022-15.37.1.781/637826962217811942
-[ Engine.WindowManager ] @12.3.2022-15.37.0.226/637826962202265213 [ INFO ] Focus restored
-[ Engine.Behaviours.ScriptBehaviourManager.AddBehaviour() ] @12.3.2022-15.37.0.231/637826962202310154 [ INFO ] The behaviour with the name ABC was added.
-[ Engine.WindowManager ] @12.3.2022-15.37.0.345/637826962203453488 [ INFO ] The Main Window was loaded.
-[ Engine.WindowManager ] @12.3.2022-15.37.1.730/637826962217303049 [ INFO ] The Main Window was closed.
-[ Engine.MainInteraction.SaveLogs() ] @12.3.2022-15.37.1.781/637826962217811578 [ WARN ] Saving Logs...
+Log file for the Lucid Game Engine saved at: 12.3.2022-16.50.27.301/637827006273013734
+[ Engine.WindowManager ] @12.3.2022-16.49.46.457/637827005864572220 [ INFO ] Focus restored
+[ Engine.Behaviours.ScriptBehaviourManager.AddBehaviour() ] @12.3.2022-16.49.46.462/637827005864626953 [ INFO ] The behaviour with the name ABC was added.
+[ Engine.WindowManager ] @12.3.2022-16.49.46.582/637827005865822947 [ INFO ] The Main Window was loaded.
+[ Engine.WindowManager ] @12.3.2022-16.49.47.826/637827005878266508 [ INFO ] Focus lost
+[ Engine.WindowManager ] @12.3.2022-16.50.21.154/637827006211540181 [ INFO ] Focus restored
+[ Engine.WindowManager ] @12.3.2022-16.50.22.668/637827006226680736 [ INFO ] Focus lost
+[ Engine.WindowManager ] @12.3.2022-16.50.22.747/637827006227475931 [ INFO ] Focus restored
+[ Engine.WindowManager ] @12.3.2022-16.50.26.526/637827006265262416 [ INFO ] Focus lost
+[ Engine.WindowManager ] @12.3.2022-16.50.27.291/637827006272918439 [ INFO ] The Main Window was closed.
+[ Engine.MainInteraction.SaveLogs() ] @12.3.2022-16.50.27.301/637827006273013611 [ WARN ] Saving Logs...
