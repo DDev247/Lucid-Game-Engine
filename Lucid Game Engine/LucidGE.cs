@@ -50,6 +50,7 @@ namespace LucidGE
                 InternalData.GEWindow = curWindow;
                 InternalDebugger.Init();
                 Debug.Init();
+                Behaviours.ScriptBehaviourHandler.Init();
 
                 Data.Data.wpfPath = Environment.CurrentDirectory;
                 Data.Data.assetPath = Data.Data.wpfPath + @"\assets";
@@ -275,6 +276,7 @@ namespace LucidGE
                 Log add = new(source, 2, content);
                 Data.Data.DebugLogs.Add(add);
                 Data.Data.DebugWindow.Log(add);
+                Console.Write("\a");
             }
         }
     }

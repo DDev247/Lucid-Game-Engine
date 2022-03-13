@@ -102,17 +102,18 @@ namespace LucidGE
             /// TYPE myBehaviourScript = ScriptBehaviourManager.AddBehaviour("myScript");
             /// </c>
             /// </example>
-            /// <param name="Name">The name to give the behaviour</param>
+            /// <param name="behaviour">The behaviour to add</param>
             /// <returns>The constructed Behaviour</returns>
-            public static ScriptBehaviour AddBehaviour(string Name)
+            public static void AddBehaviour(ScriptBehaviour behaviour)
             {
-                ScriptBehaviour behaviour = new ScriptBehaviour();
+                //ScriptBehaviour behaviour = new ScriptBehaviour();
                 //behaviour.Name = Name;
 
                 behaviours.Add(behaviour);
+                behaviour.OnCreation();
 
-                InternalDebugger.Log("Engine.Behaviours.ScriptBehaviourManager.AddBehaviour()", 0, $"The behaviour with the name {Name} was added.");
-                return behaviour;
+                InternalDebugger.Log("Engine.Behaviours.ScriptBehaviourManager.AddBehaviour()", 0, $"The behaviour with the name {behaviour.Name} was added.");
+                //return behaviour;
             }
 
             /// <summary>
@@ -150,6 +151,14 @@ namespace LucidGE
             public ScriptBehaviour()
             {
                 Name = "Behaviour" + new Random().Next(int.MaxValue).ToString();
+            }
+
+            /// <summary>
+            /// Method called when the Behaviour is created
+            /// </summary>
+            public virtual void OnCreation()
+            {
+
             }
 
             /// <summary>

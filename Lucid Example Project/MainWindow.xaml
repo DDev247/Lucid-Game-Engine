@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Lucid_Example_Project"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid x:Name="grid"> 
-
+    <Grid x:Name="grid">
+        
     </Grid>
 </Window>

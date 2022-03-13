@@ -24,21 +24,32 @@ namespace Lucid_Example_Project
     {
         public TextBlock text;
 
-        public override void Start()
+        public override void OnCreation()
         {
+            Debug.LogWarning("Lucid_Example_Project-TextUpdater", "TextUpdater was created");
+            
             text = new TextBlock();
             text.Name = this.Name;
             text.HorizontalAlignment = HorizontalAlignment.Center;
             text.VerticalAlignment = VerticalAlignment.Center;
-
+            text.Visibility = Visibility.Visible;
+            text.FontSize = 32;
+            
             MainWindow.Grid.Children.Add(text);
 
+            base.OnCreation();
+        }
+
+        public override void Start()
+        {
             base.Start();
         }
 
         public override void Update()
         {
-            text.Text = DateTime.Now.ToString();
+            if(text != null)
+                text.Text = DateTime.Now.ToString();
+            //Debug.Log("Time", DateTime.Now.ToString());
             base.Update();
         }
     }

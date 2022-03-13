@@ -37,18 +37,21 @@ namespace Lucid_Example_Project
 
             Debug.Log("Lucid_Example_Project-MainWindow.Constructor", "Hello, World!");
 
-            ScriptBehaviour? updaterBehaviour = ScriptBehaviourManager.AddBehaviour("ABC");
-            TextUpdater? updater = updaterBehaviour as TextUpdater;
+            TextUpdater? updater = new TextUpdater();
+            ScriptBehaviourManager.AddBehaviour(updater);
 
+            /*
             if (updaterBehaviour == null)
                 Debug.LogWarning("Lucid_Example_Project-MainWindow.Constructor", "updaterBehaviour is null");
             else if (updaterBehaviour != null)
                 Debug.LogMessage("Lucid_Example_Project-MainWindow.Constructor", "updaterBehaviour is not null");
+            */
 
             if (updater == null)
                 Debug.LogWarning("Lucid_Example_Project-MainWindow.Constructor", "updater is null");
             else if (updater != null)
                 Debug.LogMessage("Lucid_Example_Project-MainWindow.Constructor", "updater is not null");
+
             //this.AddChild(updater.text);
         }
     }
