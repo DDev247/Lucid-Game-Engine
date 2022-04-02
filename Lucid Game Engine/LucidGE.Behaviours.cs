@@ -38,7 +38,7 @@ namespace LucidGE
 
             public static void CallStart()
             {
-                foreach(ScriptBehaviour s in ScriptBehaviourManager.behaviours)
+                foreach (ScriptBehaviour s in ScriptBehaviourManager.behaviours)
                 {
                     s.Start();
                 }
@@ -78,7 +78,7 @@ namespace LucidGE
 
             public static async Task GameLoop()
             {
-                while(true)
+                while (true)
                 {
                     CallUpdate();
                     await Task.Delay(1);
@@ -130,7 +130,7 @@ namespace LucidGE
             /// Checks if a behaviour of the name <paramref name="Name"/> exists
             /// </summary>
             /// <param name="Name">The name of the behaviour</param>
-            public static bool HehaviourExists(string Name)
+            public static bool BehaviourExists(string Name)
             {
                 return behaviours.Exists(x => x.Name == Name);
             }
@@ -158,7 +158,7 @@ namespace LucidGE
             /// </summary>
             public virtual void OnCreation()
             {
-
+                InternalDebugger.Log($"ScriptBehaviour-{Name}", 0, $"OnCreation() in behaviour '{Name}' was called.");
             }
 
             /// <summary>
@@ -166,7 +166,7 @@ namespace LucidGE
             /// </summary>
             public virtual void Start()
             {
-
+                InternalDebugger.Log($"ScriptBehaviour-{Name}", 0, $"Start() in behaviour '{Name}' was called.");
             }
 
             /// <summary>
@@ -174,7 +174,8 @@ namespace LucidGE
             /// </summary>
             public virtual void Update()
             {
-
+                // Don't log updates because they will fill the entire log
+                // InternalDebugger.Log($"ScriptBehaviour-{Name}", 0, $"Update() in behaviour '{Name}' was called.");
             }
 
             /// <summary>
@@ -182,7 +183,7 @@ namespace LucidGE
             /// </summary>
             public virtual void OnExit()
             {
-
+                InternalDebugger.Log($"ScriptBehaviour-{Name}", 0, $"OnExit() in behaviour '{Name}' was called.");
             }
 
             /// <summary>
@@ -190,7 +191,7 @@ namespace LucidGE
             /// </summary>
             public virtual void OnLostFocus()
             {
-
+                InternalDebugger.Log($"ScriptBehaviour-{Name}", 0, $"OnLostFocus() in behaviour '{Name}' was called.");
             }
 
             /// <summary>
@@ -198,7 +199,7 @@ namespace LucidGE
             /// </summary>
             public virtual void OnRestoredFocus()
             {
-
+                InternalDebugger.Log($"ScriptBehaviour-{Name}", 0, $"OnRestoredFocus() in behaviour '{Name}' was called.");
             }
         }
     }

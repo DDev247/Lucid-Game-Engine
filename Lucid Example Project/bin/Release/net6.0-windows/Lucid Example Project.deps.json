@@ -1,0 +1,39 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "Lucid Example Project/1.0.0": {
+        "dependencies": {
+          "Lucid Game Engine": "1.0.0.0"
+        },
+        "runtime": {
+          "Lucid Example Project.dll": {}
+        }
+      },
+      "Lucid Game Engine/1.0.0.0": {
+        "runtime": {
+          "Lucid Game Engine.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Lucid Example Project/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Lucid Game Engine/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

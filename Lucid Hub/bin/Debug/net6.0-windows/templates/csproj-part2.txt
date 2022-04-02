@@ -1,0 +1,12 @@
+</RootNamespace>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="Lucid Game Engine">
+      <HintPath>\Lucid\Lucid Game Engine.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

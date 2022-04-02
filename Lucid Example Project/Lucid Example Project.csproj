@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="Lucid Game Engine">
       <HintPath>..\Lucid Game Engine\bin\Debug\net6.0-windows\Lucid Game Engine.dll</HintPath>
     </Reference>

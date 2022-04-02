@@ -20,7 +20,12 @@
       "ProjectGuid": "79ea4965-8eb1-434e-90fe-bf33910b7dd3",
       "DisplayName": "Lucid Example Project",
       "ColorIndex": 2
+    },
+    "c7dcdd86-7405-4df6-a016-24d17de02c11": {
+      "ProjectGuid": "c7dcdd86-7405-4df6-a016-24d17de02c11",
+      "DisplayName": "Lucid Hub",
+      "ColorIndex": 3
     }
   },
-  "NextColorIndex": 3
+  "NextColorIndex": 4
 }

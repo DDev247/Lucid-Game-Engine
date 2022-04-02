@@ -35,7 +35,7 @@ namespace Lucid_Example_Project
             text.Visibility = Visibility.Visible;
             text.FontSize = 32;
             
-            MainWindow.Grid.Children.Add(text);
+            Data.UIGrid.Children.Add(text);
 
             base.OnCreation();
         }

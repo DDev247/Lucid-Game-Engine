@@ -1,6 +1,12 @@
-Log file for the Lucid Game Engine saved at: 13.3.2022-17.7.31.712/637827880517124607
-[ Engine.WindowManager ] @13.3.2022-17.7.18.85/637827880380856590 [ INFO ] Focus restored
-[ Engine.Behaviours.ScriptBehaviourManager.AddBehaviour() ] @13.3.2022-17.7.18.89/637827880380896551 [ INFO ] The behaviour with the name Behaviour185481875 was added.
-[ Engine.WindowManager ] @13.3.2022-17.7.18.237/637827880382372364 [ INFO ] The Main Window was loaded.
-[ Engine.WindowManager ] @13.3.2022-17.7.31.673/637827880516731292 [ INFO ] The Main Window was closed.
-[ Engine.MainInteraction.SaveLogs() ] @13.3.2022-17.7.31.712/637827880517124300 [ WARN ] Saving Logs...
+Log file for the Lucid Game Engine saved at: 2.4.2022-12.54.43.232/637845008832320562
+[ Engine.WindowManager ] @2.4.2022-12.54.25.403/637845008654032070 [ INFO ] Focus restored
+[ ScriptBehaviour-Behaviour1177212455 ] @2.4.2022-12.54.25.579/637845008655793194 [ INFO ] OnCreation() in behaviour 'Behaviour1177212455' was called.
+[ Engine.Behaviours.ScriptBehaviourManager.AddBehaviour() ] @2.4.2022-12.54.25.579/637845008655793237 [ INFO ] The behaviour with the name Behaviour1177212455 was added.
+[ Engine.WindowManager ] @2.4.2022-12.54.25.733/637845008657334761 [ INFO ] The Main Window was loaded.
+[ Engine.WindowManager ] @2.4.2022-12.54.35.725/637845008757259290 [ INFO ] Focus lost
+[ ScriptBehaviour-Behaviour1177212455 ] @2.4.2022-12.54.35.726/637845008757262101 [ INFO ] OnLostFocus() in behaviour 'Behaviour1177212455' was called.
+[ Engine.WindowManager ] @2.4.2022-12.54.41.757/637845008817573345 [ INFO ] Focus restored
+[ ScriptBehaviour-Behaviour1177212455 ] @2.4.2022-12.54.41.757/637845008817575135 [ INFO ] OnRestoredFocus() in behaviour 'Behaviour1177212455' was called.
+[ Engine.WindowManager ] @2.4.2022-12.54.43.178/637845008831782615 [ INFO ] The Main Window was closed.
+[ ScriptBehaviour-Behaviour1177212455 ] @2.4.2022-12.54.43.208/637845008832087334 [ INFO ] OnExit() in behaviour 'Behaviour1177212455' was called.
+[ Engine.MainInteraction.SaveLogs() ] @2.4.2022-12.54.43.232/637845008832320402 [ WARN ] Saving Logs...

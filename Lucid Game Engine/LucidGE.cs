@@ -1,6 +1,18 @@
 // Main namespace for the
 // Lucid Game Engine
 
+/*
+
+    catch (Exception ex)
+    {
+        Debug.LogError("Engine.", "Exception caught: " + ex.Message);
+        InternalDebugger.Log("Engine.", 2, "Exception caught: " + ex.Message + " @ " + ex.StackTrace);
+        MessageBoxResult result = MessageBox.Show("Exception thrown: " + ex.Message, "Exception caught!", MessageBoxButton.OK, MessageBoxImage.Error);
+        Environment.Exit(1);
+    }
+
+*/
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +38,23 @@ using LucidGE.Classes;
 using System.IO;
 using System.Xml;
 using System.Windows.Interop;
+using Newtonsoft.Json;
 
+/// <summary>
+/// Main Namespace of the Lucid Game Engine
+/// <para>
+///     Example try-catch:
+///     <code>
+///     catch (Exception ex)
+///     {
+///         Debug.LogError("NAMESPACE.SUBNAMESPACE.CLASS.METHOD() (method not needed)", "Exception caught: " + ex.Message);
+///         InternalDebugger.Log("NAMESPACE.SUBNAMESPACE.CLASS.METHOD() (method not needed)", 2, "Exception caught: " + ex.Message + " @ " + ex.StackTrace);
+///         MessageBoxResult result = MessageBox.Show("Exception thrown: " + ex.Message, "Exception caught!", MessageBoxButton.OK, MessageBoxImage.Error);
+///         Environment.Exit(1);
+///     }
+///     </code>
+/// </para>
+/// </summary>
 namespace LucidGE
 {
     namespace Interaction
@@ -45,26 +73,87 @@ namespace LucidGE
             /// </para>
             /// </summary>
             /// <param name="curWindow">The window to use with the Game Engine</param>
-            public static void InitGE(Window curWindow)
+            /// <param name="curGrid">The grid to add objects to</param>
+            /// <param name="neededFonts">The needed fonts for the game (the ones you need to have for proper display)</param>
+            public static void InitGE(Window curWindow, Grid curGrid, string[]? neededFonts = null)
             {
-                InternalData.GEWindow = curWindow;
-                InternalDebugger.Init();
-                Debug.Init();
-                Behaviours.ScriptBehaviourHandler.Init();
+                try
+                {
+                    InternalData.GEWindow = curWindow;
+                    Data.Data.MainWindow = curWindow;
+                    Data.Data.MainGrid = curGrid;
 
-                Data.Data.wpfPath = Environment.CurrentDirectory;
-                Data.Data.assetPath = Data.Data.wpfPath + @"\assets";
-                Data.Data.settingsPath = Data.Data.wpfPath + @"\assets\settings.adp";
-                Data.Data.spriteAssetPath = Data.Data.wpfPath + @"\assets\sprites";
-                Data.Data.dataAssetPath = Data.Data.wpfPath + @"\assets\data";
+                    InternalDebugger.Init();
+                    Debug.Init();
+                    Behaviours.ScriptBehaviourHandler.Init();
 
-                // Subscribing to window events
-                curWindow.Loaded += Window_LoadedWindow;
-                curWindow.Closed += Window_Closed;
+                    Data.Data.wpfPath = Environment.CurrentDirectory;
+                    Data.Data.assetPath = Data.Data.wpfPath + @"\assets";
+                    Data.Data.settingsPath = Data.Data.wpfPath + @"\assets\settings.json";
+                    Data.Data.spriteAssetPath = Data.Data.wpfPath + @"\assets\sprites";
+                    Data.Data.dataAssetPath = Data.Data.wpfPath + @"\assets\data";
+                    Data.Data.soundPath = Data.Data.wpfPath + @"\assets\sounds";
 
-                CheckFocus();
-                InternalData.GESettings = new Settings(Data.Data.settingsPath);
-                ApplySettings(InternalData.GESettings);
+                    if (neededFonts != null && neededFonts.Length > 0)
+                    {
+                        foreach (string font in neededFonts)
+                        {
+                            bool e = FontExists(font);
+                            if (!e)
+                            {
+                                Debug.LogError("Engine.FontCheck", $"Failed to load font: {font}");
+                                MessageBoxResult result = MessageBox.Show($"Error loading font: {font}\nDo you want me to search it in google?", "Error", MessageBoxButton.YesNo, MessageBoxImage.Error);
+                                if (result == MessageBoxResult.Yes)
+                                {
+                                    var uri = "https://www.google.com/search?q=Font+" + font;
+                                    var psi = new System.Diagnostics.ProcessStartInfo();
+                                    psi.UseShellExecute = true;
+                                    psi.FileName = uri;
+                                    System.Diagnostics.Process.Start(psi);
+                                }
+                                Environment.Exit(1);
+                            }
+                        }
+                    }
+
+                    // Subscribing to window events
+                    curWindow.Loaded += Window_LoadedWindow;
+                    curWindow.Closed += Window_Closed;
+
+                    // Creating grids
+                    Data.Data.BGGrid = new Grid();
+                    Data.Data.WorldGrid = new Grid();
+                    Data.Data.EffectGrid = new Grid();
+                    Data.Data.UIGrid = new Grid();
+
+                    Data.Data.MainGrid.Children.Add(Data.Data.BGGrid);
+                    Data.Data.MainGrid.Children.Add(Data.Data.WorldGrid);
+                    Data.Data.MainGrid.Children.Add(Data.Data.EffectGrid);
+                    Data.Data.MainGrid.Children.Add(Data.Data.UIGrid);
+
+                    // Adding shitty version text
+                    TextBlock verText = new TextBlock();
+
+                    verText.Text = "lucid" + Data.Data.GE_VERSION + " net-" + Data.Data.NET_VERSION;
+                    //verText.FontFamily = new FontFamily("Trebuchet MS");
+                    verText.FontSize = 10;
+                    verText.Visibility = Visibility.Visible;
+
+                    Data.Data.UIGrid.Children.Add(verText);
+
+                    InternalData.GEVersionTextBlock = verText;
+                    
+                    CheckFocus();
+                    InternalData.GESettings = new Settings(Data.Data.settingsPath);
+                    ApplySettings(InternalData.GESettings);
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogError("Engine.Main", "Exception caught: " + ex.Message);
+                    InternalDebugger.Log("Engine.Main", 2, "Exception caught: " + ex.Message + " @ " + ex.StackTrace);
+                    MessageBoxResult result = MessageBox.Show("Exception thrown: " + ex.Message, "Exception caught!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Environment.Exit(1);
+                }
             }
 
             private static void Window_Closed(object? sender, EventArgs e)
@@ -72,6 +161,7 @@ namespace LucidGE
                 InternalDebugger.Log("Engine.WindowManager", 0, "The Main Window was closed.");
 
                 Data.Data.DebugWindow.Close();
+                Behaviours.ScriptBehaviourHandler.CallExit();
 
                 SaveLogs();
             }
@@ -79,6 +169,16 @@ namespace LucidGE
             private static void Window_LoadedWindow(object? sender, RoutedEventArgs e)
             {
                 InternalDebugger.Log("Engine.WindowManager", 0, "The Main Window was loaded.");
+                Debug.Log("Engine.WindowManager", "The Main Window was loaded");
+            }
+
+            public static bool FontExists(string fontName)
+            {
+                // Set default font.
+                using (System.Drawing.Font DefaultFont = new System.Drawing.Font(fontName, 9))
+                {
+                    return DefaultFont.Name == fontName ? true : false;
+                }
             }
 
             public static void SaveLogs()
@@ -122,7 +222,13 @@ namespace LucidGE
                 {
                     InternalData.GEWindow.Width = settings.GEWidth;
                     InternalData.GEWindow.Height = settings.GEHeight;
+
                     InternalData.GEWindow.Title = settings.GEWindowTitle;
+
+                    if(settings.GEResizable)
+                        InternalData.GEWindow.ResizeMode = ResizeMode.CanResizeWithGrip;
+                    else
+                        InternalData.GEWindow.ResizeMode = ResizeMode.CanMinimize;
                 }
             }
 
@@ -147,12 +253,16 @@ namespace LucidGE
                         lastFocus = Data.Data.focused;
                         Debug.Log("Engine.MainInteraction.focusCheck()", "Focus restored");
                         InternalDebugger.Log("Engine.WindowManager", 0, "Focus restored");
+
+                        Behaviours.ScriptBehaviourHandler.CallRestoredFocus();
                     }
                     else if (lastFocus == true && Data.Data.focused == false)
                     {
                         lastFocus = Data.Data.focused;
                         Debug.Log("Engine.MainInteraction.focusCheck()", "Focus lost");
                         InternalDebugger.Log("Engine.WindowManager", 0, "Focus lost");
+
+                        Behaviours.ScriptBehaviourHandler.CallLostFocus();
                     }
                 }
             }
@@ -175,6 +285,19 @@ namespace LucidGE
                 return false;
             }
         }
+
+        //public class LucidWindow : Window
+        //{
+        //    public Grid windowGrid;
+        //    public LucidWindow asLucid;
+        //
+        //    public LucidWindow()
+        //    {
+        //        windowGrid = new Grid();
+        //        AddChild(windowGrid);
+        //        asLucid = this as LucidWindow;
+        //    }
+        //}
     }
 
     namespace Data
@@ -186,6 +309,7 @@ namespace LucidGE
         {
             public static Window? GEWindow;
             public static Settings? GESettings;
+            public static TextBlock? GEVersionTextBlock;
 
             public static List<InternalLog> DebugLogs = new();
         }
@@ -195,11 +319,59 @@ namespace LucidGE
         /// </summary>
         public static class Data
         {
-            public static string? wpfPath;
-            public static string? assetPath;
-            public static string? settingsPath;
-            public static string? spriteAssetPath;
-            public static string? dataAssetPath;
+            public const string GE_VERSION = "0.0.1";
+            public const string NET_VERSION = "core6.0";
+
+            public static string? wpfPath = "";
+            public static string? assetPath = "";
+            public static string? soundPath = "";
+            public static string? settingsPath = "";
+            public static string? spriteAssetPath = "";
+            public static string? dataAssetPath = "";
+
+            // Window stuff
+
+            /// <summary>
+            /// The window the GE uses
+            /// </summary>
+            public static Window MainWindow;
+
+            /// <summary>
+            /// The grid the GE uses
+            /// </summary>
+            internal static Grid MainGrid;
+
+            /// <summary>
+            /// The UI grid the GE uses
+            /// <para>
+            /// It sits on top of all grids.
+            /// </para>
+            /// </summary>
+            public static Grid UIGrid;
+
+            /// <summary>
+            /// The Background grid the GE uses
+            /// <para>
+            /// It sits below all grids.
+            /// </para>
+            /// </summary>
+            public static Grid BGGrid;
+
+            /// <summary>
+            /// The Effects grid the GE uses
+            /// <para>
+            /// It sits below the UI grid.
+            /// </para>
+            /// </summary>
+            public static Grid EffectGrid;
+
+            /// <summary>
+            /// The Effects grid the GE uses
+            /// <para>
+            /// It sits below the UI grid and on top of the Background grid.
+            /// </para>
+            /// </summary>
+            public static Grid WorldGrid;
 
             // Debug stuff
             public static List<Log> DebugLogs = new();
@@ -283,6 +455,7 @@ namespace LucidGE
 
     namespace Classes
     {
+
         [Serializable]
         public class Log
         {
@@ -385,23 +558,72 @@ namespace LucidGE
             public string? GEWindowTitle = "Blank Window";
             public bool GEWatermarks = true;
 
+            public bool GEResizable = false;
+
             public Settings(string path)
             {
-                string source = File.ReadAllText(path);
-                string[] split = source.Split('\n');
-
-                GEWidth = float.Parse(split[0]);
-                GEHeight = float.Parse(split[1]);
-                GEWatermarks = bool.Parse(split[2]);
-                if(GEWatermarks)
+                if (File.Exists(path))
                 {
-                    GEWindowTitle = "Lucid Engine - " + split[3];
+                    //string source = File.ReadAllText(path);
+                    //string[] split = source.Split('\n');
+                    //
+                    //GEWidth = float.Parse(split[0]);
+                    //GEHeight = float.Parse(split[1]);
+                    //GEWatermarks = bool.Parse(split[2]);
+                    //if (GEWatermarks)
+                    //{
+                    //    GEWindowTitle = "Lucid Engine - " + split[3];
+                    //}
+                    //else
+                    //{
+                    //    GEWindowTitle = split[3];
+                    //}
+
+                    string settingsJson = File.ReadAllText(path);
+
+#nullable disable
+                    SettingsRoot json = JsonConvert.DeserializeObject<SettingsRoot>(settingsJson);
+
+                    GEWidth = json.Width;
+                    GEHeight = json.Height;
+                    GEWatermarks = json.Watermarks;
+
+                    if (GEWatermarks)
+                    {
+                        GEWindowTitle = "Lucid Engine - " + json.ProjectName;
+                    }
+                    else
+                    {
+                        GEWindowTitle = json.ProjectName;
+                    }
+
+                    GEResizable = json.CanBeResized;
+
+#nullable enable
                 }
                 else
                 {
-                    GEWindowTitle = split[3];
+                    throw new FileNotFoundException($"The settings file does not exist.\nFile path:{path}");
                 }
             }
+        }
+
+        public class SettingsRoot
+        {
+            [JsonProperty("watermarks")]
+            public bool Watermarks { get; set; }
+
+            [JsonProperty("project-name")]
+            public string ProjectName { get; set; }
+
+            [JsonProperty("height")]
+            public int Height { get; set; }
+
+            [JsonProperty("width")]
+            public int Width { get; set; }
+
+            [JsonProperty("can-be-resized")]
+            public bool CanBeResized { get; set; }
         }
     }
 }

@@ -17,6 +17,8 @@ using LucidGE.Interaction;
 using LucidGE.Data;
 using LucidGE.Debuggers;
 using LucidGE.Behaviours;
+using LucidGE.Classes;
+using LucidGE.Components;
 
 namespace Lucid_Example_Project
 {
@@ -26,14 +28,19 @@ namespace Lucid_Example_Project
     public partial class MainWindow : Window
     {
         public static MainWindow Instance { get; private set; }
-        public static Grid Grid { get; private set; }
 
         public MainWindow()
         {
             InitializeComponent();
-            MainInteraction.InitGE(this);
+
+
+            string[] fonts =
+            {
+                "Trebuchet MS"
+            };
+
+            MainInteraction.InitGE(this, mainGrid, fonts);
             Instance = this;
-            Grid = grid;
 
             Debug.Log("Lucid_Example_Project-MainWindow.Constructor", "Hello, World!");
 
@@ -51,6 +58,11 @@ namespace Lucid_Example_Project
                 Debug.LogWarning("Lucid_Example_Project-MainWindow.Constructor", "updater is null");
             else if (updater != null)
                 Debug.LogMessage("Lucid_Example_Project-MainWindow.Constructor", "updater is not null");
+
+            MusicPlayer.PlayFile("hit-or-miss.mp3", true);
+            //MediaPlayer pl = new MediaPlayer();
+            //pl.Open(new Uri(Environment.CurrentDirectory + @"\assets\sound\main.wav"));
+            //pl.Play();
 
             //this.AddChild(updater.text);
         }
