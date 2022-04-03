@@ -1,12 +1,16 @@
-Log file for the Lucid Game Engine saved at: 2.4.2022-12.54.43.232/637845008832320562
-[ Engine.WindowManager ] @2.4.2022-12.54.25.403/637845008654032070 [ INFO ] Focus restored
-[ ScriptBehaviour-Behaviour1177212455 ] @2.4.2022-12.54.25.579/637845008655793194 [ INFO ] OnCreation() in behaviour 'Behaviour1177212455' was called.
-[ Engine.Behaviours.ScriptBehaviourManager.AddBehaviour() ] @2.4.2022-12.54.25.579/637845008655793237 [ INFO ] The behaviour with the name Behaviour1177212455 was added.
-[ Engine.WindowManager ] @2.4.2022-12.54.25.733/637845008657334761 [ INFO ] The Main Window was loaded.
-[ Engine.WindowManager ] @2.4.2022-12.54.35.725/637845008757259290 [ INFO ] Focus lost
-[ ScriptBehaviour-Behaviour1177212455 ] @2.4.2022-12.54.35.726/637845008757262101 [ INFO ] OnLostFocus() in behaviour 'Behaviour1177212455' was called.
-[ Engine.WindowManager ] @2.4.2022-12.54.41.757/637845008817573345 [ INFO ] Focus restored
-[ ScriptBehaviour-Behaviour1177212455 ] @2.4.2022-12.54.41.757/637845008817575135 [ INFO ] OnRestoredFocus() in behaviour 'Behaviour1177212455' was called.
-[ Engine.WindowManager ] @2.4.2022-12.54.43.178/637845008831782615 [ INFO ] The Main Window was closed.
-[ ScriptBehaviour-Behaviour1177212455 ] @2.4.2022-12.54.43.208/637845008832087334 [ INFO ] OnExit() in behaviour 'Behaviour1177212455' was called.
-[ Engine.MainInteraction.SaveLogs() ] @2.4.2022-12.54.43.232/637845008832320402 [ WARN ] Saving Logs...
+Log file for the Lucid Game Engine saved at: 3.4.2022-17.0.57.985/637846020579852725
+[ Engine.WindowManager ] @3.4.2022-17.0.6.175/637846020061754615 [ INFO ] Focus restored
+[ ScriptBehaviour-Behaviour1664781199 ] @3.4.2022-17.0.6.342/637846020063425880 [ INFO ] OnCreation() in behaviour 'Behaviour1664781199' was called.
+[ Engine.Behaviours.ScriptBehaviourManager.AddBehaviour() ] @3.4.2022-17.0.6.342/637846020063425915 [ INFO ] The behaviour with the name Behaviour1664781199 was added.
+[ Engine.WindowManager ] @3.4.2022-17.0.6.531/637846020065317461 [ INFO ] The Main Window was loaded.
+[ Engine.WindowManager ] @3.4.2022-17.0.14.689/637846020146897562 [ INFO ] Focus lost
+[ ScriptBehaviour-Behaviour1664781199 ] @3.4.2022-17.0.14.690/637846020146900402 [ INFO ] OnLostFocus() in behaviour 'Behaviour1664781199' was called.
+[ Engine.WindowManager ] @3.4.2022-17.0.16.65/637846020160656599 [ INFO ] Focus restored
+[ ScriptBehaviour-Behaviour1664781199 ] @3.4.2022-17.0.16.65/637846020160658152 [ INFO ] OnRestoredFocus() in behaviour 'Behaviour1664781199' was called.
+[ Engine.WindowManager ] @3.4.2022-17.0.16.488/637846020164881351 [ INFO ] Focus lost
+[ ScriptBehaviour-Behaviour1664781199 ] @3.4.2022-17.0.16.488/637846020164881446 [ INFO ] OnLostFocus() in behaviour 'Behaviour1664781199' was called.
+[ Engine.WindowManager ] @3.4.2022-17.0.56.787/637846020567872599 [ INFO ] Focus restored
+[ ScriptBehaviour-Behaviour1664781199 ] @3.4.2022-17.0.56.787/637846020567872648 [ INFO ] OnRestoredFocus() in behaviour 'Behaviour1664781199' was called.
+[ Engine.WindowManager ] @3.4.2022-17.0.57.948/637846020579487928 [ INFO ] The Main Window was closed.
+[ ScriptBehaviour-Behaviour1664781199 ] @3.4.2022-17.0.57.980/637846020579805595 [ INFO ] OnExit() in behaviour 'Behaviour1664781199' was called.
+[ Engine.MainInteraction.SaveLogs() ] @3.4.2022-17.0.57.985/637846020579852635 [ WARN ] Saving Logs...

@@ -149,8 +149,8 @@ namespace LucidGE
                 }
                 catch (Exception ex)
                 {
-                    Debug.LogError("Engine.Main", "Exception caught: " + ex.Message);
-                    InternalDebugger.Log("Engine.Main", 2, "Exception caught: " + ex.Message + " @ " + ex.StackTrace);
+                    Debug.LogError("Engine.MainThread", "Exception caught: " + ex.Message);
+                    InternalDebugger.Log("Engine.MainThread", 2, "Exception caught: " + ex.Message + " @ " + ex.StackTrace);
                     MessageBoxResult result = MessageBox.Show("Exception thrown: " + ex.Message, "Exception caught!", MessageBoxButton.OK, MessageBoxImage.Error);
                     Environment.Exit(1);
                 }
@@ -319,7 +319,7 @@ namespace LucidGE
         /// </summary>
         public static class Data
         {
-            public const string GE_VERSION = "0.0.1";
+            public const string GE_VERSION = "0.0.2";
             public const string NET_VERSION = "core6.0";
 
             public static string? wpfPath = "";
