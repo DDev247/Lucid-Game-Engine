@@ -99,11 +99,11 @@ namespace LucidGE
             /// <example>
             /// How to use:
             /// <c>
-            /// TYPE myBehaviourScript = ScriptBehaviourManager.AddBehaviour("myScript");
+            /// TYPE myBehaviourScript = new TYPE();
+            /// ScriptBehaviourManager.AddBehaviour(myBehaviourScript);
             /// </c>
             /// </example>
             /// <param name="behaviour">The behaviour to add</param>
-            /// <returns>The constructed Behaviour</returns>
             public static void AddBehaviour(ScriptBehaviour behaviour)
             {
                 //ScriptBehaviour behaviour = new ScriptBehaviour();
@@ -200,6 +200,136 @@ namespace LucidGE
             public virtual void OnRestoredFocus()
             {
                 InternalDebugger.Log($"ScriptBehaviour-{Name}", 0, $"OnRestoredFocus() in behaviour '{Name}' was called.");
+            }
+        }
+
+        public class Gameobject
+        {
+            public GTransform transform;
+
+            public ScriptBehaviour[] scripts;
+
+            public UIElement[] elements;
+
+            /// <summary>
+            /// Creates a new Gameobject with everything empty
+            /// </summary>
+            public Gameobject()
+            {
+                transform = new GTransform();
+
+                scripts = new ScriptBehaviour[0];
+
+                elements = new UIElement[0];
+            }
+
+            /// <summary>
+            /// Adds a behaviour to the script list
+            /// </summary>
+            /// <param name="behaviour">The behaviour to add</param>
+            public void AddBehaviour(ScriptBehaviour behaviour)
+            {
+                scripts.Append(behaviour);
+            }
+
+            /// <summary>
+            /// Adds an element to the element list
+            /// </summary>
+            /// <param name="element">The element to add</param>
+            public void AddElement(UIElement element)
+            {
+                elements.Append(element);
+            }
+
+            void UpdatePositions()
+            {
+                foreach(UIElement element in elements)
+                {
+                    
+                }
+            }
+        }
+
+        public class GTransform
+        {
+            public Vector2 position;
+            public GRotation rotation;
+
+            /// <summary>
+            /// The position change in the next frame
+            /// </summary>
+            public Vector2 velocity;
+
+            public GTransform()
+            {
+                position = new Vector2();
+                rotation = new GRotation();
+                velocity = new Vector2();
+            }
+
+            public GTransform(Vector2 pos, GRotation rot, Vector2 vel)
+            {
+                position = pos;
+                rotation = rot;
+                velocity = vel;
+            }
+        }
+
+        public class GRotation
+        {
+            public float Rotation;
+
+            /// <summary>
+            /// Creates a GRotation with the rotation set to 0
+            /// </summary>
+            public GRotation()
+            {
+                Rotation = 0;
+            }
+
+            /// <summary>
+            /// Creates a GRotation with the given rotation
+            /// </summary>
+            /// <param name="rotation">The value to set the rotation</param>
+            public GRotation(float rotation)
+            {
+                Rotation = rotation;
+            }
+        }
+
+        public class Vector2
+        {
+            public float X { get; set; }
+            public float Y { get; set; }
+
+            /// <summary>
+            /// Creates a Vector2 with the X and Y set to 0
+            /// </summary>
+            public Vector2()
+            {
+                X = 0;
+                Y = 0;
+            }
+
+            /// <summary>
+            /// Creates a Vector2 with the given X and Y coordinates
+            /// </summary>
+            /// <param name="x">The value to set the X coordinate to</param>
+            /// <param name="y">The value to set the Y coordinate to</param>
+            public Vector2(float x, float y)
+            {
+                X = x;
+                Y = y;
+            }
+
+            /// <summary>
+            /// Converts a Vector to Vector2
+            /// </summary>
+            /// <param name="vector">The vector to convert</param>
+            public Vector2(Vector vector)
+            {
+                X = (float)vector.X;
+                Y = (float)vector.Y;
             }
         }
     }

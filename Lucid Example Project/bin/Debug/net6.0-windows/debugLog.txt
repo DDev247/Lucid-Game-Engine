@@ -1,14 +1,15 @@
-Log file for the Lucid Game Engine saved at: 3.4.2022-17.0.57.981/637846020579814562
+Log file for the Lucid Game Engine saved at: 9.4.2022-10.16.8.308/637850961683086280
 [ Engine.MainInteraction.focusCheck() ] [ INFO ] Focus restored
 [ Lucid_Example_Project-MainWindow.Constructor ] [ INFO ] Hello, World!
 [ Lucid_Example_Project-TextUpdater ] [ WARN ] TextUpdater was created
 [ Lucid_Example_Project-MainWindow.Constructor ] [ INFO ] updater is not null
-[ a0 ] [ INFO ] a0
-[ a1 ] [ INFO ] a1
-[ a2 ] [ INFO ] a2
-[ a3 ] [ INFO ] a3
-[ a4 ] [ INFO ] a4
 [ Engine.WindowManager ] [ INFO ] The Main Window was loaded
+[ Engine.MainInteraction.focusCheck() ] [ INFO ] Focus lost
+[ Engine.MainInteraction.focusCheck() ] [ INFO ] Focus restored
+[ Engine.MainInteraction.focusCheck() ] [ INFO ] Focus lost
+[ Engine.MainInteraction.focusCheck() ] [ INFO ] Focus restored
+[ Engine.MainInteraction.focusCheck() ] [ INFO ] Focus lost
+[ Engine.MainInteraction.focusCheck() ] [ INFO ] Focus restored
 [ Engine.MainInteraction.focusCheck() ] [ INFO ] Focus lost
 [ Engine.MainInteraction.focusCheck() ] [ INFO ] Focus restored
 [ Engine.MainInteraction.focusCheck() ] [ INFO ] Focus lost

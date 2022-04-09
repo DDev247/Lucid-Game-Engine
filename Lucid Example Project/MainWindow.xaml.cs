@@ -59,11 +59,6 @@ namespace Lucid_Example_Project
             else if (updater != null)
                 Debug.LogMessage("Lucid_Example_Project-MainWindow.Constructor", "updater is not null");
 
-            MusicPlayer.PlayFile("hit-or-miss.mp3", true);
-            //MediaPlayer pl = new MediaPlayer();
-            //pl.Open(new Uri(Environment.CurrentDirectory + @"\assets\sound\main.wav"));
-            //pl.Play();
-
             //this.AddChild(updater.text);
         }
     }
