@@ -1,0 +1,17 @@
+Log file for the Lucid Game Engine saved at: 15.4.2022-12.36.26.367/637856229863671728
+[ Engine.WindowManager ] @15.4.2022-12.35.48.425/637856229484252360 [ INFO ] Focus restored
+[ ScriptBehaviour-Behaviour1258846611 ] @15.4.2022-12.35.48.526/637856229485266050 [ INFO ] OnCreation() in behaviour 'Behaviour1258846611' was called.
+[ ScriptBehaviour-Behaviour1258846611 ] @15.4.2022-12.35.48.529/637856229485294529 [ INFO ] OnAttached() in behaviour 'Behaviour1258846611' was called. Attached to 'My GO'
+[ Engine.Behaviours.ScriptBehaviourManager.AddBehaviour() ] @15.4.2022-12.35.48.529/637856229485296292 [ INFO ] The behaviour with the name Behaviour1258846611 was added.
+[ Engine.WindowManager ] @15.4.2022-12.35.48.610/637856229486108886 [ INFO ] The Main Window was loaded.
+[ Engine.WindowManager ] @15.4.2022-12.35.49.603/637856229496038929 [ INFO ] Focus lost
+[ ScriptBehaviour-Behaviour1258846611 ] @15.4.2022-12.35.49.604/637856229496041441 [ INFO ] OnLostFocus() in behaviour 'Behaviour1258846611' was called.
+[ Engine.WindowManager ] @15.4.2022-12.36.5.868/637856229658682563 [ INFO ] Focus restored
+[ ScriptBehaviour-Behaviour1258846611 ] @15.4.2022-12.36.5.868/637856229658684077 [ INFO ] OnRestoredFocus() in behaviour 'Behaviour1258846611' was called.
+[ Engine.WindowManager ] @15.4.2022-12.36.6.842/637856229668426590 [ INFO ] Focus lost
+[ ScriptBehaviour-Behaviour1258846611 ] @15.4.2022-12.36.6.842/637856229668426639 [ INFO ] OnLostFocus() in behaviour 'Behaviour1258846611' was called.
+[ Engine.WindowManager ] @15.4.2022-12.36.24.722/637856229847226258 [ INFO ] Focus restored
+[ ScriptBehaviour-Behaviour1258846611 ] @15.4.2022-12.36.24.722/637856229847226314 [ INFO ] OnRestoredFocus() in behaviour 'Behaviour1258846611' was called.
+[ Engine.WindowManager ] @15.4.2022-12.36.26.349/637856229863495741 [ INFO ] The Main Window was closed.
+[ ScriptBehaviour-Behaviour1258846611 ] @15.4.2022-12.36.26.356/637856229863564306 [ INFO ] OnExit() in behaviour 'Behaviour1258846611' was called.
+[ Engine.MainInteraction.SaveLogs() ] @15.4.2022-12.36.26.367/637856229863671646 [ WARN ] Saving Logs...

@@ -39,6 +39,7 @@ using System.IO;
 using System.Xml;
 using System.Windows.Interop;
 using Newtonsoft.Json;
+using Discord;
 
 /// <summary>
 /// Main Namespace of the Lucid Game Engine
@@ -85,7 +86,6 @@ namespace LucidGE
 
                     InternalDebugger.Init();
                     Debug.Init();
-                    Behaviours.ScriptBehaviourHandler.Init();
 
                     Data.Data.wpfPath = Environment.CurrentDirectory;
                     Data.Data.assetPath = Data.Data.wpfPath + @"\assets";
@@ -146,6 +146,13 @@ namespace LucidGE
                     CheckFocus();
                     InternalData.GESettings = new Settings(Data.Data.settingsPath);
                     ApplySettings(InternalData.GESettings);
+
+                    Data.Data.DiscordState = InternalData.GESettings.ProjectName;
+                    Data.Data.DiscordImage = "lge";
+
+                    InternalData.discord = new Discord.Discord(long.Parse(InternalData.GESettings.DiscordAppID), (UInt64)CreateFlags.Default);
+
+                    Behaviours.ScriptBehaviourHandler.Init();
                 }
                 catch (Exception ex)
                 {
@@ -312,6 +319,8 @@ namespace LucidGE
             public static TextBlock? GEVersionTextBlock;
 
             public static List<InternalLog> DebugLogs = new();
+
+            public static Discord.Discord discord;
         }
 
         /// <summary>
@@ -328,6 +337,12 @@ namespace LucidGE
             public static string? settingsPath = "";
             public static string? spriteAssetPath = "";
             public static string? dataAssetPath = "";
+
+            // Discord
+
+            public static string DiscordState = "";
+            public static string DiscordDetails = "Details";
+            public static string DiscordImage = "";
 
             // Window stuff
 
@@ -411,8 +426,11 @@ namespace LucidGE
             {
                 Data.Data.DebugLogs = new List<Log>();
                 Data.Data.DebugWindow = new Debugger();
+#if DEBUG
                 Data.Data.DebugWindow.Show();
                 Data.Data.DebugWindow.Activate();
+                StartKeyLoop();
+#endif
             }
 
             //public static void LogFull(string source, int severity, string content)
@@ -449,6 +467,23 @@ namespace LucidGE
                 Data.Data.DebugLogs.Add(add);
                 Data.Data.DebugWindow.Log(add);
                 Console.Write("\a");
+            }
+
+            public static async Task StartKeyLoop()
+            {
+                while(true)
+                {
+                    if(Keyboard.IsKeyDown(Key.OemTilde))
+                    {
+                        if (Data.Data.DebugWindow == null)
+                            Data.Data.DebugWindow = new Debugger();
+                        Data.Data.DebugWindow.Show();
+                        Data.Data.DebugWindow.Activate();
+                        while (Keyboard.IsKeyDown(Key.OemTilde))
+                            await Task.Delay(1);
+                    }
+                    await Task.Delay(1);
+                }
             }
         }
     }
@@ -557,8 +592,10 @@ namespace LucidGE
 
             public string? GEWindowTitle = "Blank Window";
             public bool GEWatermarks = true;
+            public string? ProjectName = "";
 
             public bool GEResizable = false;
+            public string DiscordAppID = "";
 
             public Settings(string path)
             {
@@ -582,6 +619,7 @@ namespace LucidGE
                     string settingsJson = File.ReadAllText(path);
 
 #nullable disable
+
                     SettingsRoot json = JsonConvert.DeserializeObject<SettingsRoot>(settingsJson);
 
                     GEWidth = json.Width;
@@ -599,11 +637,22 @@ namespace LucidGE
 
                     GEResizable = json.CanBeResized;
 
+                    if (json.DiscordID == "")
+                    {
+                        DiscordAppID = "964468536993001512";
+                    }
+                    else
+                    {
+                        DiscordAppID = json.DiscordID;
+                    }
+
+                    ProjectName = json.ProjectName;
+
 #nullable enable
                 }
                 else
                 {
-                    throw new FileNotFoundException($"The settings file does not exist.\nFile path:{path}");
+                    throw new FileNotFoundException($"The settings file does not exist.\nFile path: {path}");
                 }
             }
         }
@@ -624,6 +673,9 @@ namespace LucidGE
 
             [JsonProperty("can-be-resized")]
             public bool CanBeResized { get; set; }
+
+            [JsonProperty("discord-id")]
+            public string DiscordID { get; set; }
         }
     }
 }

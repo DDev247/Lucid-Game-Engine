@@ -18,4 +18,22 @@
     </Reference>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="plugins\DiscordSDK\lib\x86_64\discord_game_sdk.bundle">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Update="discord_game_sdk.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="plugins\DiscordSDK\lib\x86_64\discord_game_sdk.dll.lib">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Update="plugins\DiscordSDK\lib\x86_64\discord_game_sdk.dylib">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Update="plugins\DiscordSDK\lib\x86_64\discord_game_sdk.so">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

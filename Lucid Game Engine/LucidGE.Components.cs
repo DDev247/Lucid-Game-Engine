@@ -162,5 +162,50 @@ namespace LucidGE
                 player.Stop();
             }
         }
+
+        public static class LucidInput
+        {
+            public static bool IsKeyDown(Key key)
+            {
+                return Keyboard.IsKeyDown(key);
+            }
+
+            public static bool IsKeyUp(Key key)
+            {
+                return Keyboard.IsKeyUp(key);
+            }
+
+            public static bool IsMouseButtonDown(MouseButton button)
+            {
+                if (button == MouseButton.Left)
+                    return Mouse.LeftButton == MouseButtonState.Pressed;
+                else if (button == MouseButton.Right)
+                    return Mouse.RightButton == MouseButtonState.Pressed;
+                else if (button == MouseButton.Middle)
+                    return Mouse.MiddleButton == MouseButtonState.Pressed;
+                else if (button == MouseButton.XButton1)
+                    return Mouse.XButton1 == MouseButtonState.Pressed;
+                else if (button == MouseButton.XButton2)
+                    return Mouse.XButton2 == MouseButtonState.Pressed;
+                else
+                    return false;
+            }
+
+            public static bool IsMouseButtonUp(MouseButton button)
+            {
+                if (button == MouseButton.Left)
+                    return Mouse.LeftButton == MouseButtonState.Released;
+                else if (button == MouseButton.Right)
+                    return Mouse.RightButton == MouseButtonState.Released;
+                else if (button == MouseButton.Middle)
+                    return Mouse.MiddleButton == MouseButtonState.Released;
+                else if (button == MouseButton.XButton1)
+                    return Mouse.XButton1 == MouseButtonState.Released;
+                else if (button == MouseButton.XButton2)
+                    return Mouse.XButton2 == MouseButtonState.Released;
+                else
+                    return false;
+            }
+        }
     }
 }

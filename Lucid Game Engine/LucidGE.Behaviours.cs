@@ -81,6 +81,41 @@ namespace LucidGE
                 while (true)
                 {
                     CallUpdate();
+                    Discord.Activity activity = new Discord.Activity();
+                    try
+                    {
+#if DEBUG
+                        activity.State = "Debugging Lucid GE";
+
+                        activity.Details = "(" + Data.Data.DiscordState + ") " + "Debugging Project '" + InternalData.GESettings.ProjectName + "'";
+#else
+                        if (InternalData.GESettings.GEWatermarks)
+                        {
+                            activity.State = Data.Data.DiscordState + " (Lucid Game Engine)";
+
+                            activity.Details = Data.Data.DiscordDetails;
+                        }
+                        else
+                        {
+                            activity.State = Data.Data.DiscordState;
+
+                            activity.Details = Data.Data.DiscordDetails;
+                        }
+#endif
+                        activity.Assets.LargeText = "Lucid Game Engine";
+                        activity.Assets.LargeImage = Data.Data.DiscordImage;
+
+                        InternalData.discord.GetActivityManager().UpdateActivity(activity, (result) =>
+                        {
+
+                        });
+                    }
+                    catch (Exception ex)
+                    {
+                        InternalDebugger.Log("GameLoop()", 1, "Failed to set activity. Exception: " + ex.Message);
+                    }
+
+                    InternalData.discord.RunCallbacks();
                     await Task.Delay(1);
                 }
             }
@@ -143,6 +178,8 @@ namespace LucidGE
         {
             public string Name { get; set; }
 
+            public Gameobject AttachedGameobject { get; set; }
+
             //public ScriptBehaviour(string name)
             //{
             //    Name = name;
@@ -201,10 +238,20 @@ namespace LucidGE
             {
                 InternalDebugger.Log($"ScriptBehaviour-{Name}", 0, $"OnRestoredFocus() in behaviour '{Name}' was called.");
             }
+
+            /// <summary>
+            /// Method called when the focus is restored
+            /// </summary>
+            public virtual void OnAttached()
+            {
+                InternalDebugger.Log($"ScriptBehaviour-{Name}", 0, $"OnAttached() in behaviour '{Name}' was called. Attached to '{AttachedGameobject.Name}'");
+            }
         }
 
         public class Gameobject
         {
+            public string Name { get; set; }
+
             public GTransform transform;
 
             public ScriptBehaviour[] scripts;
@@ -221,6 +268,8 @@ namespace LucidGE
                 scripts = new ScriptBehaviour[0];
 
                 elements = new UIElement[0];
+
+                OnCreated();
             }
 
             /// <summary>
@@ -230,6 +279,8 @@ namespace LucidGE
             public void AddBehaviour(ScriptBehaviour behaviour)
             {
                 scripts.Append(behaviour);
+                behaviour.AttachedGameobject = this;
+                behaviour.OnAttached();
             }
 
             /// <summary>
@@ -241,11 +292,32 @@ namespace LucidGE
                 elements.Append(element);
             }
 
-            void UpdatePositions()
+            private void OnCreated()
             {
+                Update();
+            }
+
+            private async Task Update()
+            {
+                while(true)
+                {
+                    transform.Tick();
+                    UpdatePositions();
+
+                    await Task.Delay(1);
+                }
+            }
+
+            private void UpdatePositions()
+            {
+                TransformGroup group = new TransformGroup();
+                group.Children.Add(new TranslateTransform(transform.position.X, transform.position.Y));
+                group.Children.Add(new RotateTransform(transform.rotation.Rotation));
+                group.Children.Add(new ScaleTransform(transform.scale.X, transform.scale.Y));
+
                 foreach(UIElement element in elements)
                 {
-                    
+                    element.RenderTransform = group;
                 }
             }
         }
@@ -254,24 +326,42 @@ namespace LucidGE
         {
             public Vector2 position;
             public GRotation rotation;
+            public Vector2 scale;
 
             /// <summary>
             /// The position change in the next frame
             /// </summary>
             public Vector2 velocity;
 
+            /// <summary>
+            /// Create a new GTransform with everything set to the default.
+            /// </summary>
             public GTransform()
             {
                 position = new Vector2();
                 rotation = new GRotation();
                 velocity = new Vector2();
+                this.scale = new Vector2(1, 1);
             }
 
-            public GTransform(Vector2 pos, GRotation rot, Vector2 vel)
+            /// <summary>
+            /// Creates a new GTransform with everything set to what you set it to.
+            /// </summary>
+            /// <param name="pos">The Vector2 to set position to.</param>
+            /// <param name="rot">The GRotation to set rotation to.</param>
+            /// <param name="vel">The Vector2 to set velocity to.</param>
+            /// <param name="scale">The Vector2 to set scale to.</param>
+            public GTransform(Vector2 pos, GRotation rot, Vector2 vel, Vector2 scale)
             {
                 position = pos;
                 rotation = rot;
                 velocity = vel;
+                this.scale = scale;
+            }
+
+            internal void Tick()
+            {
+                position = position.Add(velocity);
             }
         }
 
@@ -330,6 +420,11 @@ namespace LucidGE
             {
                 X = (float)vector.X;
                 Y = (float)vector.Y;
+            }
+
+            public Vector2 Add(Vector2 v2)
+            {
+                return new Vector2(X + v2.X, Y + v2.Y);
             }
         }
     }
