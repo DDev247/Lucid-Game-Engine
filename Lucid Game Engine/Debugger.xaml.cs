@@ -22,6 +22,9 @@ namespace LucidGE
         {
             InitializeComponent();
             lb = listBox;
+            lb.Items.Add($">> Lucid Game Engine version {Data.Data.GE_VERSION} net-{Data.Data.NET_VERSION}");
+            lb.Items.Add($">> https://github.com/DDev247/Lucid-Game-Engine/");
+            lb.Items.Add($">> ");
         }
 
         /// <summary>

@@ -76,19 +76,69 @@ namespace LucidGE
                 }
             }
 
+            public static async Task HealthMonitor()
+            {
+                InternalDebugger.Log("Engine.HealthMonitor", 0, "Starting the health monitor");
+            
+                while(true)
+                {
+                    float avg = totalFPS / totalFPSCounts;
+            
+                    InternalDebugger.Log("Engine.HealthMonitor", 0, $"Health report: Average FPS: {avg}, Total frames: {totalFrames}, FPS Counts: {totalFPSCounts}");
+                    Debug.Log("Engine.HealthMonitor", $"Health report: Average FPS: {avg}, Total frames: {totalFrames}, FPS Counts: {totalFPSCounts}");
+
+                    if (avg < 60)
+                        Debug.LogWarning("Engine.HealthMonitor", "Average FPS is less than 60!");
+            
+                    totalFPS = 0;
+                    totalFPSCounts = 0;
+            
+                    await Task.Delay(1000 * 10);
+                }
+            }
+            
+            public static int totalFrames;
+            private static int frameCount;
+            public static int FPS;
+            private static int totalFPS,totalFPSCounts;
+            public static async Task FramerateCounter()
+            {
+                InternalDebugger.Log("Engine.FramerateCounter", 0, "Starting the framerate counter");
+            
+                while(true)
+                {
+                    FPS = frameCount;
+                    frameCount = 0;
+                    totalFPS += FPS;
+                    totalFPSCounts++;
+            
+                    InternalDebugger.Log("test", 0, "fps " + FPS);
+            
+                    await Task.Delay(1000);
+                }
+            }
+            
             public static async Task GameLoop()
             {
+                InternalDebugger.Log("Engine.ScriptBehaviourHandler", 0, "Game loop started. Updates will be called.");
+                HealthMonitor();
+                FramerateCounter();
+
                 while (true)
                 {
+                    totalFrames++;
+                    frameCount++;
+
                     CallUpdate();
+
                     Discord.Activity activity = new Discord.Activity();
                     try
                     {
-#if DEBUG
-                        activity.State = "Debugging Lucid GE";
-
-                        activity.Details = "(" + Data.Data.DiscordState + ") " + "Debugging Project '" + InternalData.GESettings.ProjectName + "'";
-#else
+//#if DEBUG
+//                        activity.State = "Debugging Lucid GE";
+//
+//                        activity.Details = "(" + Data.Data.DiscordState + ") " + "Debugging Project '" + InternalData.GESettings.ProjectName + "'";
+//#else
                         if (InternalData.GESettings.GEWatermarks)
                         {
                             activity.State = Data.Data.DiscordState + " (Lucid Game Engine)";
@@ -101,7 +151,7 @@ namespace LucidGE
 
                             activity.Details = Data.Data.DiscordDetails;
                         }
-#endif
+//#endif
                         activity.Assets.LargeText = "Lucid Game Engine";
                         activity.Assets.LargeImage = Data.Data.DiscordImage;
 
@@ -112,7 +162,7 @@ namespace LucidGE
                     }
                     catch (Exception ex)
                     {
-                        InternalDebugger.Log("GameLoop()", 1, "Failed to set activity. Exception: " + ex.Message);
+                        InternalDebugger.Log("Engine.ScriptBehaviourHandler", 1, "Failed to set discord activity. Exception: " + ex.Message);
                     }
 
                     InternalData.discord.RunCallbacks();
@@ -248,6 +298,7 @@ namespace LucidGE
             }
         }
 
+        [Serializable]
         public class Gameobject
         {
             public string Name { get; set; }
@@ -322,6 +373,7 @@ namespace LucidGE
             }
         }
 
+        [Serializable]
         public class GTransform
         {
             public Vector2 position;
@@ -365,6 +417,7 @@ namespace LucidGE
             }
         }
 
+        [Serializable]
         public class GRotation
         {
             public float Rotation;
@@ -387,6 +440,7 @@ namespace LucidGE
             }
         }
 
+        [Serializable]
         public class Vector2
         {
             public float X { get; set; }

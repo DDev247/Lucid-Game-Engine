@@ -48,10 +48,7 @@ using Discord;
 ///     <code>
 ///     catch (Exception ex)
 ///     {
-///         Debug.LogError("NAMESPACE.SUBNAMESPACE.CLASS.METHOD() (method not needed)", "Exception caught: " + ex.Message);
-///         InternalDebugger.Log("NAMESPACE.SUBNAMESPACE.CLASS.METHOD() (method not needed)", 2, "Exception caught: " + ex.Message + " @ " + ex.StackTrace);
-///         MessageBoxResult result = MessageBox.Show("Exception thrown: " + ex.Message, "Exception caught!", MessageBoxButton.OK, MessageBoxImage.Error);
-///         Environment.Exit(1);
+///         MainInteraction.CaughtException(ex);
 ///     }
 ///     </code>
 /// </para>
@@ -80,6 +77,7 @@ namespace LucidGE
             {
                 try
                 {
+                    InternalData.GEStartTime = DateTime.Now;
                     InternalData.GEWindow = curWindow;
                     Data.Data.MainWindow = curWindow;
                     Data.Data.MainGrid = curGrid;
@@ -92,6 +90,7 @@ namespace LucidGE
                     Data.Data.settingsPath = Data.Data.wpfPath + @"\assets\settings.json";
                     Data.Data.spriteAssetPath = Data.Data.wpfPath + @"\assets\sprites";
                     Data.Data.dataAssetPath = Data.Data.wpfPath + @"\assets\data";
+                    Data.Data.levelAssetPath = Data.Data.wpfPath + @"\assets\data\levels";
                     Data.Data.soundPath = Data.Data.wpfPath + @"\assets\sounds";
 
                     if (neededFonts != null && neededFonts.Length > 0)
@@ -122,11 +121,13 @@ namespace LucidGE
 
                     // Creating grids
                     Data.Data.BGGrid = new Grid();
+                    Data.Data.SceneGrid = new Grid();
                     Data.Data.WorldGrid = new Grid();
                     Data.Data.EffectGrid = new Grid();
                     Data.Data.UIGrid = new Grid();
 
                     Data.Data.MainGrid.Children.Add(Data.Data.BGGrid);
+                    Data.Data.MainGrid.Children.Add(Data.Data.SceneGrid);
                     Data.Data.MainGrid.Children.Add(Data.Data.WorldGrid);
                     Data.Data.MainGrid.Children.Add(Data.Data.EffectGrid);
                     Data.Data.MainGrid.Children.Add(Data.Data.UIGrid);
@@ -136,7 +137,7 @@ namespace LucidGE
 
                     verText.Text = "lucid" + Data.Data.GE_VERSION + " net-" + Data.Data.NET_VERSION;
                     //verText.FontFamily = new FontFamily("Trebuchet MS");
-                    verText.FontSize = 10;
+                    verText.FontSize = 12;
                     verText.Visibility = Visibility.Visible;
 
                     Data.Data.UIGrid.Children.Add(verText);
@@ -150,16 +151,15 @@ namespace LucidGE
                     Data.Data.DiscordState = InternalData.GESettings.ProjectName;
                     Data.Data.DiscordImage = "lge";
 
-                    InternalData.discord = new Discord.Discord(long.Parse(InternalData.GESettings.DiscordAppID), (UInt64)CreateFlags.Default);
+                    Debug.LogWarning("Engine.MainThread", "Initializing Discord");
+                    InternalDebugger.Log("Engine.MainThread", 1, "Initializing Discord");
+                    InternalData.discord = new Discord.Discord(long.Parse(InternalData.GESettings.DiscordAppID), (UInt64)CreateFlags.NoRequireDiscord);
 
                     Behaviours.ScriptBehaviourHandler.Init();
                 }
                 catch (Exception ex)
                 {
-                    Debug.LogError("Engine.MainThread", "Exception caught: " + ex.Message);
-                    InternalDebugger.Log("Engine.MainThread", 2, "Exception caught: " + ex.Message + " @ " + ex.StackTrace);
-                    MessageBoxResult result = MessageBox.Show("Exception thrown: " + ex.Message, "Exception caught!", MessageBoxButton.OK, MessageBoxImage.Error);
-                    Environment.Exit(1);
+                    CaughtException(ex);
                 }
             }
 
@@ -171,6 +171,29 @@ namespace LucidGE
                 Behaviours.ScriptBehaviourHandler.CallExit();
 
                 SaveLogs();
+            }
+
+            public static void CaughtException(Exception ex)
+            {
+                Debug.LogError("Engine.MainThread", "Exception caught: " + ex.Message);
+                InternalDebugger.Log("Engine.MainThread", 2, "Exception caught: " + ex.Message + " @ " + ex.StackTrace);
+                MessageBoxResult result = MessageBox.Show("Exception thrown: " + ex.Message + "\nThe situation may be unsafe, do you want to continue?", "Exception caught!", MessageBoxButton.YesNo, MessageBoxImage.Error);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    Debug.LogWarning("Engine.MainThread", "Continuing execution, please save work and restart!");
+                    InternalDebugger.Log("Engine.MainThread", 1, "Continuing execution, please save work and restart!");
+                    
+                }
+                else
+                {
+                    Data.Data.DebugWindow.Close();
+                    Behaviours.ScriptBehaviourHandler.CallExit();
+
+                    SaveLogs();
+
+                    Environment.Exit(1);
+                }
             }
 
             private static void Window_LoadedWindow(object? sender, RoutedEventArgs e)
@@ -190,18 +213,24 @@ namespace LucidGE
 
             public static void SaveLogs()
             {
-                Debug.Log("Engine.MainInteraction.SaveLogs()", "Saving Logs...");
+                Debug.LogWarning("Engine.MainInteraction.SaveLogs()", "Saving Logs...");
                 // Saving Debug Logs
                 string fileDir = Environment.CurrentDirectory + @"\debugLog.txt";
                 string toSave = "";
 
-                string Date = DateTime.Now.Day + "." + DateTime.Now.Month + "." + DateTime.Now.Year;
-                string Time = DateTime.Now.Hour + "." + DateTime.Now.Minute + "." + DateTime.Now.Second + "." + DateTime.Now.Millisecond + "/" + DateTime.Now.Ticks;
-                toSave += "Log file for the Lucid Game Engine saved at: " + Date + "-" + Time + "\n";
+                DateTime timeSave = DateTime.Now;
+                TimeSpan runTime = timeSave.Subtract(InternalData.GEStartTime);
+                string Date = timeSave.Day + "." + timeSave.Month + "." + timeSave.Year;
+                string Time = timeSave.Hour + "." + timeSave.Minute + "." + timeSave.Second + "." + timeSave.Millisecond + "/" + timeSave.Ticks;
+                toSave += $"LOGINFO>> Log file for the Lucid Game Engine saved at: {Date}-{Time}\n";
+                toSave += $"LOGINFO>> Engine Running for: {runTime.ToString()}\n";
+                toSave += $"LOGINFO>> Total frames: {LucidGE.Behaviours.ScriptBehaviourHandler.totalFrames}\n";
+                toSave += $"LOGINFO>> Engine version: {LucidGE.Data.Data.GE_VERSION}, Engine .NET version: {LucidGE.Data.Data.NET_VERSION}\n";
+                toSave += $"LOGINFO>> Github: https://github.com/DDev247/Lucid-Game-Engine/ \n";
 
                 foreach (Log log in Data.Data.DebugLogs)
                 {
-                    toSave += log.ToString() + Environment.NewLine;
+                    toSave += "LOG>> " + log.ToString() + Environment.NewLine;
                 }
 
                 File.WriteAllText(fileDir, toSave);
@@ -211,13 +240,18 @@ namespace LucidGE
                 fileDir = Environment.CurrentDirectory + @"\internalLog.txt";
                 toSave = "";
 
-                Date = DateTime.Now.Day + "." + DateTime.Now.Month + "." + DateTime.Now.Year;
-                Time = DateTime.Now.Hour + "." + DateTime.Now.Minute + "." + DateTime.Now.Second + "." + DateTime.Now.Millisecond + "/" + DateTime.Now.Ticks;
-                toSave += "Log file for the Lucid Game Engine saved at: " + Date + "-" + Time + "\n";
+                timeSave = DateTime.Now;
+                Date = timeSave.Day + "." + timeSave.Month + "." + timeSave.Year;
+                Time = timeSave.Hour + "." + timeSave.Minute + "." + timeSave.Second + "." + timeSave.Millisecond + "/" + timeSave.Ticks;
+                toSave += $"LOGINFO>> Log file for the Lucid Game Engine saved at: {Date}-{Time}\n";
+                toSave += $"LOGINFO>> Engine Running for: {runTime.ToString()}\n";
+                toSave += $"LOGINFO>> Total frames: {LucidGE.Behaviours.ScriptBehaviourHandler.totalFrames}\n";
+                toSave += $"LOGINFO>> Engine version: {LucidGE.Data.Data.GE_VERSION}, Engine .NET version: {LucidGE.Data.Data.NET_VERSION}\n";
+                toSave += $"LOGINFO>> Github: https://github.com/DDev247/Lucid-Game-Engine/ \n";
 
                 foreach (InternalLog log in InternalData.DebugLogs)
                 {
-                    toSave += log.ToString() + Environment.NewLine;
+                    toSave += "LOG>> " + log.ToString() + Environment.NewLine;
                 }
 
                 File.WriteAllText(fileDir, toSave);
@@ -317,6 +351,7 @@ namespace LucidGE
             public static Window? GEWindow;
             public static Settings? GESettings;
             public static TextBlock? GEVersionTextBlock;
+            public static DateTime GEStartTime;
 
             public static List<InternalLog> DebugLogs = new();
 
@@ -328,7 +363,7 @@ namespace LucidGE
         /// </summary>
         public static class Data
         {
-            public const string GE_VERSION = "0.0.2";
+            public const string GE_VERSION = "0.0.3";
             public const string NET_VERSION = "core6.0";
 
             public static string? wpfPath = "";
@@ -337,6 +372,7 @@ namespace LucidGE
             public static string? settingsPath = "";
             public static string? spriteAssetPath = "";
             public static string? dataAssetPath = "";
+            public static string? levelAssetPath = "";
 
             // Discord
 
@@ -355,6 +391,11 @@ namespace LucidGE
             /// The grid the GE uses
             /// </summary>
             internal static Grid MainGrid;
+
+            /// <summary>
+            /// The grid the GE uses for scenes
+            /// </summary>
+            internal static Grid SceneGrid;
 
             /// <summary>
             /// The UI grid the GE uses
@@ -597,6 +638,8 @@ namespace LucidGE
             public bool GEResizable = false;
             public string DiscordAppID = "";
 
+            public bool GEShowDebug = true;
+
             public Settings(string path)
             {
                 if (File.Exists(path))
@@ -648,6 +691,8 @@ namespace LucidGE
 
                     ProjectName = json.ProjectName;
 
+                    GEShowDebug = json.Debugger;
+
 #nullable enable
                 }
                 else
@@ -676,6 +721,9 @@ namespace LucidGE
 
             [JsonProperty("discord-id")]
             public string DiscordID { get; set; }
+
+            [JsonProperty("debugger")]
+            public bool Debugger { get; set; }
         }
     }
 }

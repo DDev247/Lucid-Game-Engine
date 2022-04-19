@@ -20,6 +20,9 @@ using LucidGE.Behaviours;
 using LucidGE.Classes;
 using LucidGE.Components;
 
+using LucidGE.Scenes.Classes;
+using LucidGE.Scenes;
+
 namespace Lucid_Example_Project
 {
     /// <summary>
@@ -31,35 +34,56 @@ namespace Lucid_Example_Project
 
         public MainWindow()
         {
-            InitializeComponent();
-
-
-            string[] fonts =
+            try
             {
-                "Trebuchet MS"
-            };
+                InitializeComponent();
 
-            MainInteraction.InitGE(this, mainGrid, fonts);
-            Instance = this;
+                string[] fonts =
+                {
+                    "Trebuchet MS"
+                };
 
-            Debug.Log("Lucid_Example_Project-MainWindow.Constructor", "Hello, World!");
+                MainInteraction.InitGE(this, mainGrid, fonts);
+                Instance = this;
 
-            TextUpdater? updater = new TextUpdater();
-            ScriptBehaviourManager.AddBehaviour(updater);
+                Debug.Log("Lucid_Example_Project-MainWindow.Constructor", "Hello, World!");
 
-            /*
-            if (updaterBehaviour == null)
-                Debug.LogWarning("Lucid_Example_Project-MainWindow.Constructor", "updaterBehaviour is null");
-            else if (updaterBehaviour != null)
-                Debug.LogMessage("Lucid_Example_Project-MainWindow.Constructor", "updaterBehaviour is not null");
-            */
+                TextUpdater? updater = new TextUpdater();
+                ScriptBehaviourManager.AddBehaviour(updater);
 
-            if (updater == null)
-                Debug.LogWarning("Lucid_Example_Project-MainWindow.Constructor", "updater is null");
-            else if (updater != null)
-                Debug.LogMessage("Lucid_Example_Project-MainWindow.Constructor", "updater is not null");
+                // Creating a scene bc why not
+                Scene scene = new Scene();
+                scene.Name = "my level";
 
-            //this.AddChild(updater.text);
+                //Rectangle rect = new Rectangle();
+                //rect.Width = 250;
+                //rect.Height = 100;
+                //rect.HorizontalAlignment = HorizontalAlignment.Center;
+                //rect.VerticalAlignment = VerticalAlignment.Center;
+                //rect.Fill = new SolidColorBrush(Colors.Red);
+
+                StaticUIElement element = new StaticUIElement();
+                element.type = StaticUIElementType.Rectangle;
+                element.style.RWidth = 250;
+                element.style.RHeight = 100;
+                element.style.HorizontalAlignment = HorizontalAlignment.Center;
+                element.style.VerticalAlignment = VerticalAlignment.Center;
+                element.style.EFill = Brushes.Red;
+
+                StaticTransform transform = new StaticTransform(new Vector2(0, 0), new GRotation(), new Vector2(1, 1));
+                StaticGameObject gameObject = new StaticGameObject(transform);
+                //gameObject.AddElement(rect);
+
+                scene.AddObject(gameObject);
+
+                scene.SaveScene(Data.levelAssetPath + @"\joe.scene");
+                scene.Activate();
+                throw new Exception("AAAAAAAAAAAAAAAAAAAAAA");
+            }
+            catch(Exception ex)
+            {
+                MainInteraction.CaughtException(ex);
+            }
         }
     }
 }

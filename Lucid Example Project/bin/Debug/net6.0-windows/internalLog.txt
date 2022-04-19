@@ -1,17 +1,113 @@
-Log file for the Lucid Game Engine saved at: 15.4.2022-13.47.16.693/637856272366934321
-[ Engine.WindowManager ] @15.4.2022-13.40.44.540/637856268445402528 [ INFO ] Focus restored
-[ ScriptBehaviour-Behaviour257550279 ] @15.4.2022-13.40.45.70/637856268450705535 [ INFO ] OnCreation() in behaviour 'Behaviour257550279' was called.
-[ ScriptBehaviour-Behaviour257550279 ] @15.4.2022-13.40.45.82/637856268450822865 [ INFO ] OnAttached() in behaviour 'Behaviour257550279' was called. Attached to 'My GO'
-[ Engine.Behaviours.ScriptBehaviourManager.AddBehaviour() ] @15.4.2022-13.40.45.82/637856268450825592 [ INFO ] The behaviour with the name Behaviour257550279 was added.
-[ Engine.WindowManager ] @15.4.2022-13.40.45.283/637856268452834023 [ INFO ] The Main Window was loaded.
-[ Engine.WindowManager ] @15.4.2022-13.40.46.644/637856268466445648 [ INFO ] Focus lost
-[ ScriptBehaviour-Behaviour257550279 ] @15.4.2022-13.40.46.644/637856268466448775 [ INFO ] OnLostFocus() in behaviour 'Behaviour257550279' was called.
-[ Engine.WindowManager ] @15.4.2022-13.40.53.82/637856268530821187 [ INFO ] Focus restored
-[ ScriptBehaviour-Behaviour257550279 ] @15.4.2022-13.40.53.82/637856268530823528 [ INFO ] OnRestoredFocus() in behaviour 'Behaviour257550279' was called.
-[ Engine.WindowManager ] @15.4.2022-13.40.58.300/637856268583005198 [ INFO ] Focus lost
-[ ScriptBehaviour-Behaviour257550279 ] @15.4.2022-13.40.58.300/637856268583005261 [ INFO ] OnLostFocus() in behaviour 'Behaviour257550279' was called.
-[ Engine.WindowManager ] @15.4.2022-13.47.15.755/637856272357556011 [ INFO ] Focus restored
-[ ScriptBehaviour-Behaviour257550279 ] @15.4.2022-13.47.15.755/637856272357556079 [ INFO ] OnRestoredFocus() in behaviour 'Behaviour257550279' was called.
-[ Engine.WindowManager ] @15.4.2022-13.47.16.664/637856272366647321 [ INFO ] The Main Window was closed.
-[ ScriptBehaviour-Behaviour257550279 ] @15.4.2022-13.47.16.685/637856272366852939 [ INFO ] OnExit() in behaviour 'Behaviour257550279' was called.
-[ Engine.MainInteraction.SaveLogs() ] @15.4.2022-13.47.16.693/637856272366934217 [ WARN ] Saving Logs...
+LOGINFO>> Log file for the Lucid Game Engine saved at: 19.4.2022-11.44.33.944/637859654739440571
+LOGINFO>> Engine Running for: 00:01:17.2013124
+LOGINFO>> Total frames: 4871
+LOGINFO>> Engine version: 0.0.2, Engine .NET version: core6.0
+LOGINFO>> Github: https://github.com/DDev247/Lucid-Game-Engine/ 
+LOG>> [ Engine.WindowManager ] @19.4.2022-11.43.17.232/637859653972323886 [ INFO ] Focus restored
+LOG>> [ Engine.MainThread ] @19.4.2022-11.43.17.366/637859653973665975 [ WARN ] Initializing Discord
+LOG>> [ Engine.ScriptBehaviourHandler ] @19.4.2022-11.43.17.373/637859653973732235 [ INFO ] Game loop started. Updates will be called.
+LOG>> [ Engine.HealthMonitor ] @19.4.2022-11.43.17.373/637859653973738716 [ INFO ] Starting the health monitor
+LOG>> [ Engine.FramerateCounter ] @19.4.2022-11.43.17.425/637859653974259922 [ INFO ] Starting the framerate counter
+LOG>> [ test ] @19.4.2022-11.43.17.425/637859653974259973 [ INFO ] fps 0
+LOG>> [ ScriptBehaviour-Behaviour1566350829 ] @19.4.2022-11.43.17.435/637859653974354107 [ INFO ] OnCreation() in behaviour 'Behaviour1566350829' was called.
+LOG>> [ ScriptBehaviour-Behaviour1566350829 ] @19.4.2022-11.43.17.438/637859653974386003 [ INFO ] OnAttached() in behaviour 'Behaviour1566350829' was called. Attached to 'My GO'
+LOG>> [ Engine.Behaviours.ScriptBehaviourManager.AddBehaviour() ] @19.4.2022-11.43.17.438/637859653974387533 [ INFO ] The behaviour with the name Behaviour1566350829 was added.
+LOG>> [ Engine.WindowManager ] @19.4.2022-11.43.17.530/637859653975302229 [ INFO ] The Main Window was loaded.
+LOG>> [ test ] @19.4.2022-11.43.18.431/637859653984317328 [ INFO ] fps 51
+LOG>> [ test ] @19.4.2022-11.43.19.432/637859653994328680 [ INFO ] fps 64
+LOG>> [ test ] @19.4.2022-11.43.20.433/637859654004330014 [ INFO ] fps 60
+LOG>> [ test ] @19.4.2022-11.43.21.447/637859654014475153 [ INFO ] fps 65
+LOG>> [ test ] @19.4.2022-11.43.22.446/637859654024468004 [ INFO ] fps 64
+LOG>> [ test ] @19.4.2022-11.43.23.447/637859654034471345 [ INFO ] fps 64
+LOG>> [ test ] @19.4.2022-11.43.24.448/637859654044486271 [ INFO ] fps 64
+LOG>> [ test ] @19.4.2022-11.43.25.463/637859654054633149 [ INFO ] fps 65
+LOG>> [ Engine.WindowManager ] @19.4.2022-11.43.26.57/637859654060575483 [ INFO ] Focus lost
+LOG>> [ ScriptBehaviour-Behaviour1566350829 ] @19.4.2022-11.43.26.57/637859654060578221 [ INFO ] OnLostFocus() in behaviour 'Behaviour1566350829' was called.
+LOG>> [ test ] @19.4.2022-11.43.26.463/637859654064630757 [ INFO ] fps 64
+LOG>> [ test ] @19.4.2022-11.43.27.463/637859654074635801 [ INFO ] fps 65
+LOG>> [ Engine.WindowManager ] @19.4.2022-11.43.28.431/637859654084317496 [ INFO ] Focus restored
+LOG>> [ ScriptBehaviour-Behaviour1566350829 ] @19.4.2022-11.43.28.431/637859654084318858 [ INFO ] OnRestoredFocus() in behaviour 'Behaviour1566350829' was called.
+LOG>> [ test ] @19.4.2022-11.43.28.464/637859654084643097 [ INFO ] fps 63
+LOG>> [ test ] @19.4.2022-11.43.29.478/637859654094788880 [ INFO ] fps 65
+LOG>> [ test ] @19.4.2022-11.43.30.494/637859654104941809 [ INFO ] fps 65
+LOG>> [ test ] @19.4.2022-11.43.31.495/637859654114954088 [ INFO ] fps 65
+LOG>> [ test ] @19.4.2022-11.43.32.509/637859654125092533 [ INFO ] fps 64
+LOG>> [ test ] @19.4.2022-11.43.33.509/637859654135096081 [ INFO ] fps 64
+LOG>> [ test ] @19.4.2022-11.43.34.510/637859654145104135 [ INFO ] fps 65
+LOG>> [ test ] @19.4.2022-11.43.35.525/637859654155257738 [ INFO ] fps 65
+LOG>> [ Engine.WindowManager ] @19.4.2022-11.43.35.791/637859654157917465 [ INFO ] Focus lost
+LOG>> [ ScriptBehaviour-Behaviour1566350829 ] @19.4.2022-11.43.35.791/637859654157917532 [ INFO ] OnLostFocus() in behaviour 'Behaviour1566350829' was called.
+LOG>> [ test ] @19.4.2022-11.43.36.526/637859654165262382 [ INFO ] fps 63
+LOG>> [ test ] @19.4.2022-11.43.37.526/637859654175260774 [ INFO ] fps 65
+LOG>> [ test ] @19.4.2022-11.43.38.541/637859654185414466 [ INFO ] fps 64
+LOG>> [ test ] @19.4.2022-11.43.39.541/637859654195415661 [ INFO ] fps 64
+LOG>> [ test ] @19.4.2022-11.43.40.541/637859654205412649 [ INFO ] fps 64
+LOG>> [ test ] @19.4.2022-11.43.41.541/637859654215410634 [ INFO ] fps 65
+LOG>> [ test ] @19.4.2022-11.43.42.542/637859654225421916 [ INFO ] fps 64
+LOG>> [ test ] @19.4.2022-11.43.43.556/637859654235569159 [ INFO ] fps 64
+LOG>> [ test ] @19.4.2022-11.43.44.574/637859654245743532 [ INFO ] fps 65
+LOG>> [ test ] @19.4.2022-11.43.45.588/637859654255888456 [ INFO ] fps 66
+LOG>> [ test ] @19.4.2022-11.43.46.603/637859654266034082 [ INFO ] fps 64
+LOG>> [ test ] @19.4.2022-11.43.47.603/637859654276037293 [ INFO ] fps 64
+LOG>> [ test ] @19.4.2022-11.43.48.603/637859654286037372 [ INFO ] fps 64
+LOG>> [ test ] @19.4.2022-11.43.49.604/637859654296042677 [ INFO ] fps 64
+LOG>> [ test ] @19.4.2022-11.43.50.604/637859654306040574 [ INFO ] fps 64
+LOG>> [ test ] @19.4.2022-11.43.51.620/637859654316209123 [ INFO ] fps 66
+LOG>> [ test ] @19.4.2022-11.43.52.619/637859654326197906 [ INFO ] fps 63
+LOG>> [ test ] @19.4.2022-11.43.53.620/637859654336200637 [ INFO ] fps 64
+LOG>> [ test ] @19.4.2022-11.43.54.636/637859654346360956 [ INFO ] fps 65
+LOG>> [ test ] @19.4.2022-11.43.55.650/637859654356506571 [ INFO ] fps 66
+LOG>> [ test ] @19.4.2022-11.43.56.651/637859654366511510 [ INFO ] fps 63
+LOG>> [ test ] @19.4.2022-11.43.57.652/637859654376524699 [ INFO ] fps 65
+LOG>> [ test ] @19.4.2022-11.43.58.666/637859654386667755 [ INFO ] fps 64
+LOG>> [ test ] @19.4.2022-11.43.59.682/637859654396822633 [ INFO ] fps 65
+LOG>> [ test ] @19.4.2022-11.44.0.697/637859654406976812 [ INFO ] fps 66
+LOG>> [ test ] @19.4.2022-11.44.1.696/637859654416969134 [ INFO ] fps 63
+LOG>> [ test ] @19.4.2022-11.44.2.697/637859654426973036 [ INFO ] fps 65
+LOG>> [ Engine.WindowManager ] @19.4.2022-11.44.2.839/637859654428391220 [ INFO ] Focus restored
+LOG>> [ ScriptBehaviour-Behaviour1566350829 ] @19.4.2022-11.44.2.839/637859654428391259 [ INFO ] OnRestoredFocus() in behaviour 'Behaviour1566350829' was called.
+LOG>> [ test ] @19.4.2022-11.44.3.698/637859654436984195 [ INFO ] fps 63
+LOG>> [ test ] @19.4.2022-11.44.4.698/637859654446982256 [ INFO ] fps 64
+LOG>> [ test ] @19.4.2022-11.44.5.712/637859654457129211 [ INFO ] fps 65
+LOG>> [ test ] @19.4.2022-11.44.6.729/637859654467292975 [ INFO ] fps 65
+LOG>> [ test ] @19.4.2022-11.44.7.729/637859654477295464 [ INFO ] fps 64
+LOG>> [ test ] @19.4.2022-11.44.8.744/637859654487440195 [ INFO ] fps 65
+LOG>> [ test ] @19.4.2022-11.44.9.744/637859654497445317 [ INFO ] fps 64
+LOG>> [ test ] @19.4.2022-11.44.10.746/637859654507462150 [ INFO ] fps 65
+LOG>> [ test ] @19.4.2022-11.44.11.760/637859654517601162 [ INFO ] fps 64
+LOG>> [ test ] @19.4.2022-11.44.12.775/637859654527758079 [ INFO ] fps 66
+LOG>> [ Engine.WindowManager ] @19.4.2022-11.44.12.776/637859654527761411 [ INFO ] Focus lost
+LOG>> [ ScriptBehaviour-Behaviour1566350829 ] @19.4.2022-11.44.12.776/637859654527761439 [ INFO ] OnLostFocus() in behaviour 'Behaviour1566350829' was called.
+LOG>> [ Engine.WindowManager ] @19.4.2022-11.44.12.902/637859654529024180 [ INFO ] Focus restored
+LOG>> [ ScriptBehaviour-Behaviour1566350829 ] @19.4.2022-11.44.12.902/637859654529024213 [ INFO ] OnRestoredFocus() in behaviour 'Behaviour1566350829' was called.
+LOG>> [ test ] @19.4.2022-11.44.13.774/637859654537749997 [ INFO ] fps 63
+LOG>> [ test ] @19.4.2022-11.44.14.775/637859654547751398 [ INFO ] fps 64
+LOG>> [ test ] @19.4.2022-11.44.15.775/637859654557751533 [ INFO ] fps 64
+LOG>> [ test ] @19.4.2022-11.44.16.776/637859654567766621 [ INFO ] fps 65
+LOG>> [ test ] @19.4.2022-11.44.17.791/637859654577919322 [ INFO ] fps 65
+LOG>> [ test ] @19.4.2022-11.44.18.791/637859654587911985 [ INFO ] fps 63
+LOG>> [ test ] @19.4.2022-11.44.19.791/637859654597918905 [ INFO ] fps 64
+LOG>> [ test ] @19.4.2022-11.44.20.806/637859654608068301 [ INFO ] fps 65
+LOG>> [ test ] @19.4.2022-11.44.21.823/637859654618231817 [ INFO ] fps 66
+LOG>> [ test ] @19.4.2022-11.44.22.838/637859654628381473 [ INFO ] fps 65
+LOG>> [ test ] @19.4.2022-11.44.23.838/637859654638388837 [ INFO ] fps 64
+LOG>> [ Engine.WindowManager ] @19.4.2022-11.44.24.151/637859654641510725 [ INFO ] Focus lost
+LOG>> [ ScriptBehaviour-Behaviour1566350829 ] @19.4.2022-11.44.24.151/637859654641510753 [ INFO ] OnLostFocus() in behaviour 'Behaviour1566350829' was called.
+LOG>> [ test ] @19.4.2022-11.44.24.853/637859654648530983 [ INFO ] fps 64
+LOG>> [ test ] @19.4.2022-11.44.25.853/637859654658539255 [ INFO ] fps 64
+LOG>> [ test ] @19.4.2022-11.44.26.869/637859654668691775 [ INFO ] fps 65
+LOG>> [ Engine.WindowManager ] @19.4.2022-11.44.27.246/637859654672467983 [ INFO ] Focus restored
+LOG>> [ ScriptBehaviour-Behaviour1566350829 ] @19.4.2022-11.44.27.246/637859654672468021 [ INFO ] OnRestoredFocus() in behaviour 'Behaviour1566350829' was called.
+LOG>> [ test ] @19.4.2022-11.44.27.869/637859654678696744 [ INFO ] fps 64
+LOG>> [ Engine.WindowManager ] @19.4.2022-11.44.28.149/637859654681499464 [ INFO ] Focus lost
+LOG>> [ ScriptBehaviour-Behaviour1566350829 ] @19.4.2022-11.44.28.149/637859654681499495 [ INFO ] OnLostFocus() in behaviour 'Behaviour1566350829' was called.
+LOG>> [ test ] @19.4.2022-11.44.28.886/637859654688860686 [ INFO ] fps 66
+LOG>> [ Engine.WindowManager ] @19.4.2022-11.44.29.823/637859654698238862 [ INFO ] Focus restored
+LOG>> [ ScriptBehaviour-Behaviour1566350829 ] @19.4.2022-11.44.29.823/637859654698238893 [ INFO ] OnRestoredFocus() in behaviour 'Behaviour1566350829' was called.
+LOG>> [ test ] @19.4.2022-11.44.29.885/637859654698854157 [ INFO ] fps 64
+LOG>> [ test ] @19.4.2022-11.44.30.885/637859654708853032 [ INFO ] fps 63
+LOG>> [ test ] @19.4.2022-11.44.31.884/637859654718847818 [ INFO ] fps 64
+LOG>> [ test ] @19.4.2022-11.44.32.900/637859654729002376 [ INFO ] fps 65
+LOG>> [ Engine.WindowManager ] @19.4.2022-11.44.33.910/637859654739106612 [ INFO ] The Main Window was closed.
+LOG>> [ ScriptBehaviour-Behaviour1566350829 ] @19.4.2022-11.44.33.931/637859654739319180 [ INFO ] OnExit() in behaviour 'Behaviour1566350829' was called.
+LOG>> [ Engine.MainInteraction.SaveLogs() ] @19.4.2022-11.44.33.944/637859654739440500 [ WARN ] Saving Logs...

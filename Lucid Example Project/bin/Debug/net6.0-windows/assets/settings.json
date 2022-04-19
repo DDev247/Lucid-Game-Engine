@@ -4,5 +4,6 @@
   "height": 600,
   "width": 800,
   "can-be-resized": false,
-  "discord-id" : ""
+  "discord-id": "",
+  "debugger": true
 }
