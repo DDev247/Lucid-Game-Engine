@@ -28,7 +28,10 @@ If applicable, add screenshots to help explain your problem.
 **Desktop (please complete the following information):**
  - OS: [e.g. iOS]
  - Version [e.g. 22]
-- Game engine version (if you are using the engine e.g. making your project)
+ - Game engine version (if you are using the engine e.g. making your project)
+
+**Logfile**
+If applicable, add the `debugLog.lgelog` and `internalLog.lgelog`.
 
 **Additional context**
 Add any other context about the problem here.
