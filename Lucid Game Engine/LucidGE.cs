@@ -215,7 +215,7 @@ namespace LucidGE
             {
                 Debug.LogWarning("Engine.MainInteraction.SaveLogs()", "Saving Logs...");
                 // Saving Debug Logs
-                string fileDir = Environment.CurrentDirectory + @"\debugLog.txt";
+                string fileDir = Environment.CurrentDirectory + @"\debugLog.lgelog";
                 string toSave = "";
 
                 DateTime timeSave = DateTime.Now;
@@ -237,7 +237,7 @@ namespace LucidGE
 
                 InternalDebugger.Log("Engine.MainInteraction.SaveLogs()", 1, "Saving Logs...");
                 // Saving Internal Logs
-                fileDir = Environment.CurrentDirectory + @"\internalLog.txt";
+                fileDir = Environment.CurrentDirectory + @"\internalLog.lgelog";
                 toSave = "";
 
                 timeSave = DateTime.Now;

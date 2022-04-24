@@ -1,9 +1,0 @@
-Log file for the Lucid Game Engine saved at: 16.4.2022-19.52.39.710/637857355597105386
-[ Engine.WindowManager ] @16.4.2022-19.52.37.734/637857355577342076 [ INFO ] Focus restored
-[ ScriptBehaviour-Behaviour906147451 ] @16.4.2022-19.52.37.903/637857355579035274 [ INFO ] OnCreation() in behaviour 'Behaviour906147451' was called.
-[ ScriptBehaviour-Behaviour906147451 ] @16.4.2022-19.52.37.906/637857355579067623 [ INFO ] OnAttached() in behaviour 'Behaviour906147451' was called. Attached to 'My GO'
-[ Engine.Behaviours.ScriptBehaviourManager.AddBehaviour() ] @16.4.2022-19.52.37.906/637857355579069256 [ INFO ] The behaviour with the name Behaviour906147451 was added.
-[ Engine.WindowManager ] @16.4.2022-19.52.38.30/637857355580304912 [ INFO ] The Main Window was loaded.
-[ Engine.WindowManager ] @16.4.2022-19.52.39.678/637857355596780977 [ INFO ] The Main Window was closed.
-[ ScriptBehaviour-Behaviour906147451 ] @16.4.2022-19.52.39.703/637857355597037911 [ INFO ] OnExit() in behaviour 'Behaviour906147451' was called.
-[ Engine.MainInteraction.SaveLogs() ] @16.4.2022-19.52.39.710/637857355597105292 [ WARN ] Saving Logs...

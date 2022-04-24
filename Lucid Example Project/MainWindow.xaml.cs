@@ -52,33 +52,34 @@ namespace Lucid_Example_Project
                 ScriptBehaviourManager.AddBehaviour(updater);
 
                 // Creating a scene bc why not
-                Scene scene = new Scene();
-                scene.Name = "my level";
 
-                //Rectangle rect = new Rectangle();
-                //rect.Width = 250;
-                //rect.Height = 100;
-                //rect.HorizontalAlignment = HorizontalAlignment.Center;
-                //rect.VerticalAlignment = VerticalAlignment.Center;
-                //rect.Fill = new SolidColorBrush(Colors.Red);
-
-                StaticUIElement element = new StaticUIElement();
-                element.type = StaticUIElementType.Rectangle;
-                element.style.RWidth = 250;
-                element.style.RHeight = 100;
-                element.style.HorizontalAlignment = HorizontalAlignment.Center;
-                element.style.VerticalAlignment = VerticalAlignment.Center;
-                element.style.EFill = Brushes.Red;
-
-                StaticTransform transform = new StaticTransform(new Vector2(0, 0), new GRotation(), new Vector2(1, 1));
-                StaticGameObject gameObject = new StaticGameObject(transform);
-                //gameObject.AddElement(rect);
-
-                scene.AddObject(gameObject);
-
-                scene.SaveScene(Data.levelAssetPath + @"\joe.scene");
-                scene.Activate();
-                throw new Exception("AAAAAAAAAAAAAAAAAAAAAA");
+                //Scene scene = new Scene();
+                //scene.Name = "my level";
+                //
+                ////Rectangle rect = new Rectangle();
+                ////rect.Width = 250;
+                ////rect.Height = 100;
+                ////rect.HorizontalAlignment = HorizontalAlignment.Center;
+                ////rect.VerticalAlignment = VerticalAlignment.Center;
+                ////rect.Fill = new SolidColorBrush(Colors.Red);
+                //
+                //StaticUIElement element = new StaticUIElement();
+                //element.type = StaticUIElementType.Rectangle;
+                //element.style.RWidth = 250;
+                //element.style.RHeight = 100;
+                //element.style.HorizontalAlignment = HorizontalAlignment.Center;
+                //element.style.VerticalAlignment = VerticalAlignment.Center;
+                //element.style.EFill = Brushes.Red;
+                //
+                //StaticTransform transform = new StaticTransform(new Vector2(0, 0), new GRotation(), new Vector2(1, 1));
+                //StaticGameObject gameObject = new StaticGameObject(transform);
+                ////gameObject.AddElement(rect);
+                //
+                //scene.AddObject(gameObject);
+                //
+                //scene.SaveScene(Data.levelAssetPath + @"\joe.scene");
+                //scene.Activate();
+                //throw new Exception("AAAAAAAAAAAAAAAAAAAAAA");
             }
             catch(Exception ex)
             {
