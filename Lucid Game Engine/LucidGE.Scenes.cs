@@ -92,6 +92,26 @@ namespace LucidGE
             }
         }
 
+        public class SceneSerializer
+        {
+            public static string SerializeScene(Scene scene)
+            {
+                string returning = "";
+
+                return returning;
+            }
+
+            private string serializeGO(StaticGameObject gameObject)
+            {
+                string result = "";
+
+                
+                //gameObject.transform;
+
+                return result;
+            }
+        }
+
         namespace Classes
         {
             /// <summary>
@@ -255,6 +275,167 @@ namespace LucidGE
 
                     return returning;
                 }
+
+                public override string? ToString()
+                {
+                    string returning = "";
+
+                    if (type == StaticUIElementType.Text)
+                    {
+                        string e = "TEXTBLOCK_";
+                        e += "Width-" + style.TWidth + "+";
+                        e += "Height-" + style.THeight + "+";
+                        e += "Foreground-" + style.BrushToString(style.TForeground) + "+";
+                        e += "Opacity-"+ style.TOpacity + "+";
+                        
+                        e += "VerticalAlignment-" + VeriAli(style.VerticalAlignment) + "+";
+                        e += "HorizontalAlignment-" + HoriAli(style.HorizontalAlignment);
+
+                        returning = e;
+                    }
+                    else if (type == StaticUIElementType.Rectangle)
+                    {
+                        string e = "RECTANGLE_";
+                        e += "Width-" + style.RWidth + "+";
+                        e += "Height-" + style.RHeight + "+";
+                        e += "Fill-" + style.BrushToString(style.RFill) + "+";
+                        e += "Opacity-" + style.ROpacity + "+";
+
+                        e += "VerticalAlignment-" + VeriAli(style.VerticalAlignment) + "+";
+                        e += "HorizontalAlignment-" + HoriAli(style.HorizontalAlignment);
+
+                        returning = e;
+                    }
+                    else if (type == StaticUIElementType.Ellipse)
+                    {
+                        string e = "ELLIPSE_";
+                        e += "Width-" + style.EWidth + "+";
+                        e += "Height-" + style.EHeight + "+";
+                        e += "Fill-" + style.BrushToString(style.EFill) + "+";
+                        e += "Opacity-" + style.EOpacity + "+";
+
+                        e += "VerticalAlignment-" + VeriAli(style.VerticalAlignment) + "+";
+                        e += "HorizontalAlignment-" + HoriAli(style.HorizontalAlignment);
+
+                        returning = e;
+                    }
+                    else
+                    {
+                        returning = null;
+                    }
+
+                    return returning;
+                }
+
+                public static StaticUIElement? FromString(string source)
+                {
+                    StaticUIElement? returning = new StaticUIElement();
+
+                    string TYPE = source.Split('_')[0];
+                    if(TYPE == "TEXTBLOCK")
+                    {
+                        returning.type = StaticUIElementType.Text;
+
+                        string VARS = source.Split('_')[1];
+                        string[] VARS_INDI = VARS.Split('+');
+
+                        string VALUE = VARS_INDI[0].Split('-')[1];
+                        returning.style.TWidth = double.Parse(VALUE);
+
+                        VALUE = VARS_INDI[1].Split('-')[1];
+                        returning.style.THeight = double.Parse(VALUE);
+
+                        VALUE = VARS_INDI[2].Split('-')[1];
+                        returning.style.TForeground = returning.style.StringToBrush(VALUE);
+
+                        VALUE = VARS_INDI[3].Split('-')[1];
+                        returning.style.TOpacity = double.Parse(VALUE);
+                    }
+                    else if(TYPE == "RECTANGLE")
+                    {
+                        returning.type = StaticUIElementType.Rectangle;
+
+                        string VARS = source.Split('_')[1];
+                        string[] VARS_INDI = VARS.Split('+');
+
+                        string VALUE = VARS_INDI[0].Split('-')[1];
+                        returning.style.RWidth = double.Parse(VALUE);
+
+                        VALUE = VARS_INDI[1].Split('-')[1];
+                        returning.style.RHeight = double.Parse(VALUE);
+
+                        VALUE = VARS_INDI[2].Split('-')[1];
+                        returning.style.RFill = returning.style.StringToBrush(VALUE);
+
+                        VALUE = VARS_INDI[3].Split('-')[1];
+                        returning.style.ROpacity = double.Parse(VALUE);
+                    }
+                    else if(TYPE == "ELLIPSE")
+                    {
+                        returning.type = StaticUIElementType.Ellipse;
+
+                        string VARS = source.Split('_')[1];
+                        string[] VARS_INDI = VARS.Split('+');
+
+                        string VALUE = VARS_INDI[0].Split('-')[1];
+                        returning.style.EWidth = double.Parse(VALUE);
+
+                        VALUE = VARS_INDI[1].Split('-')[1];
+                        returning.style.EHeight = double.Parse(VALUE);
+
+                        VALUE = VARS_INDI[2].Split('-')[1];
+                        returning.style.EFill = returning.style.StringToBrush(VALUE);
+
+                        VALUE = VARS_INDI[3].Split('-')[1];
+                        returning.style.EOpacity = double.Parse(VALUE);
+                    }
+                    else
+                    {
+                        returning = null;
+                    }
+
+                    return returning;
+                }
+
+                private string HoriAli(HorizontalAlignment alignment)
+                {
+                    if(alignment == HorizontalAlignment.Center)
+                    {
+                        return "center";
+                    }
+                    else if(alignment == HorizontalAlignment.Left)
+                    {
+                        return "left";
+                    }
+                    else if(alignment == HorizontalAlignment.Right)
+                    {
+                        return "right";
+                    }
+                    else
+                    {
+                        return "left";
+                    }
+                }
+
+                private string VeriAli(VerticalAlignment alignment)
+                {
+                    if (alignment == VerticalAlignment.Center)
+                    {
+                        return "center";
+                    }
+                    else if (alignment == VerticalAlignment.Top)
+                    {
+                        return "top";
+                    }
+                    else if (alignment == VerticalAlignment.Bottom)
+                    {
+                        return "bottom";
+                    }
+                    else
+                    {
+                        return "top";
+                    }
+                }
             }
 
             [Serializable]
@@ -289,7 +470,25 @@ namespace LucidGE
                 // Shared
                 public VerticalAlignment VerticalAlignment = VerticalAlignment.Center;
                 public HorizontalAlignment HorizontalAlignment = HorizontalAlignment.Center;
+            
+                public string BrushToString(Brush brush)
+                {
+                    string returning;
+                    SolidColorBrush b = brush as SolidColorBrush;
+                    returning = b.Color.R + "/" + b.Color.G + "/" + b.Color.B;
 
+                    return returning;
+                }
+
+                public SolidColorBrush StringToBrush(string source)
+                {
+                    SolidColorBrush returning = new SolidColorBrush();
+                    string[] values = source.Split('/');
+
+                    returning.Color = Color.FromRgb(byte.Parse(values[0]), byte.Parse(values[1]), byte.Parse(values[2]));
+
+                    return returning;
+                }
             }
         }
     }

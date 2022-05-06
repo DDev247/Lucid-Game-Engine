@@ -363,7 +363,7 @@ namespace LucidGE
         /// </summary>
         public static class Data
         {
-            public const string GE_VERSION = "0.0.3";
+            public const string GE_VERSION = "0.0.4";
             public const string NET_VERSION = "core6.0";
 
             public static string? wpfPath = "";
