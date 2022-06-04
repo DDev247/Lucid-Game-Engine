@@ -36,6 +36,7 @@ namespace Lucid_Hub
 
             Create_New_Project.Visibility = Visibility.Collapsed;
             Spinner.Visibility = Visibility.Collapsed;
+            Spinner_Proj.Visibility = Visibility.Collapsed;
 
             BlurEffect blr = Sidebar.Effect as BlurEffect;
             BlurEffect blr1 = Projects.Effect as BlurEffect;
@@ -182,6 +183,7 @@ namespace Lucid_Hub
 
         private void NewProject_Created()
         {
+            Spinner_Proj.Visibility = Visibility.Collapsed;
             Create_New_Project.Visibility = Visibility.Collapsed;
             UnBlur();
         }
@@ -190,6 +192,7 @@ namespace Lucid_Hub
         {
             if(!Directory.Exists(Data.settings.SaveProjectDir + Project_Name_Box.Text.Replace(' ', '_')))
             {
+                Spinner_Proj.Visibility = Visibility.Visible;
                 CreateProject(Project_Name_Box.Text, Data.settings.SaveProjectDir + @"\" + Project_Name_Box.Text.Replace(' ', '_'), Data.settings.SaveProjectDir);
             }
             else

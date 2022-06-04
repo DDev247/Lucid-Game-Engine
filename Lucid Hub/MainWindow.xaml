@@ -6,7 +6,7 @@
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:local="clr-namespace:Lucid_Hub"
         mc:Ignorable="d"
-        Title="MainWindow" Width="1280" Height="720" ResizeMode="CanMinimize" Closing="Window_Closing">
+        Title="Lucid Hub" Width="1280" Height="720" ResizeMode="CanMinimize" Closing="Window_Closing">
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="1,0" StartPoint="0,1">
@@ -46,7 +46,7 @@
                 </Button.Resources>
             </Button>
         </Grid>
-        <Grid x:Name="Projects" d:IsHidden="True">
+        <Grid x:Name="Projects">
             <Grid.Effect>
                 <BlurEffect Radius="0"/>
             </Grid.Effect>
@@ -63,7 +63,7 @@
             <Menu x:Name="ProjectMenu" Margin="360,190,0,0" Background="{x:Null}" Foreground="#FFE4E4E4" FontSize="24" FontFamily="Verdana" FontWeight="Bold">
             </Menu>
         </Grid>
-        <Grid x:Name="Settings" Visibility="Visible">
+        <Grid x:Name="Settings" Visibility="Visible" d:IsHidden="True">
             <Grid.Effect>
                 <BlurEffect Radius="0"/>
             </Grid.Effect>
@@ -138,6 +138,7 @@
                         </Style>
                     </Button.Resources>
                 </Button>
+                <fa:ImageAwesome x:Name="Spinner_Proj" Icon="Spinner" Spin="True" SpinDuration="2" Height="64" Width="64" Margin="0,0,425,15" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
             </Grid>
         </Grid>
     </Grid>
