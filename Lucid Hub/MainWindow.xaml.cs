@@ -242,11 +242,28 @@ namespace Lucid_Hub
             if (Data.settings != null)
                 Data.settings.SaveProjectDir = Project_Dir_Box.Text;
         }
+
+        private void Update_Click(object sender, RoutedEventArgs e)
+        {
+            string[] dirs = Environment.CurrentDirectory.Split('/', '\\');
+            string path = ""; 
+
+            for(int i = 0; i < dirs.Length-2; i++) 
+            { 
+                path += dirs[i];
+            }
+
+            File.Delete(path + @"\last.json");
+            Environment.Exit(0);
+        }
     }
 
     public static class Data
     {
         public static string savedProjectDir = "";
+
+        public static string settingsDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Lucid_Hub\settings.json";
+        public static string projectDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Lucid_Hub\projects.json";
 
         public static Settings settings;
 
@@ -254,9 +271,12 @@ namespace Lucid_Hub
 
         public static async Task Initiate()
         {
-            if (File.Exists("settings.json"))
+            if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Lucid_Hub\"))
+                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Lucid_Hub\");
+
+            if (File.Exists(settingsDir))
             {
-                string read = File.ReadAllText("settings.json");
+                string read = File.ReadAllText(settingsDir);
                 settings = JsonConvert.DeserializeObject<Settings>(read);
 
                 savedProjectDir = settings.SaveProjectDir;
@@ -269,12 +289,12 @@ namespace Lucid_Hub
                 settings.EditorPath = "none";
 
                 string newJSON = JsonConvert.SerializeObject(settings, Formatting.Indented);
-                File.WriteAllText("settings.json", newJSON);
+                File.WriteAllText(settingsDir, newJSON);
             }
 
-            if (File.Exists("projects.json"))
+            if (File.Exists(projectDir))
             {
-                string read = File.ReadAllText("projects.json");
+                string read = File.ReadAllText(projectDir);
                 projects = JsonConvert.DeserializeObject<Projects>(read);
             }
             else
@@ -282,7 +302,7 @@ namespace Lucid_Hub
                 projects = new Projects();
                 projects.ProjectList = new List<string>();
                 string newJSON = JsonConvert.SerializeObject(projects, Formatting.Indented);
-                File.WriteAllText("projects.json", newJSON);
+                File.WriteAllText(projectDir, newJSON);
             }
         }
     }
