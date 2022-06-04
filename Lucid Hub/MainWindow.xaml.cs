@@ -216,7 +216,7 @@ namespace Lucid_Hub
             settings.EditorPath = Code_Editor_Box.Text;
 
             string newJSON = JsonConvert.SerializeObject(settings, Formatting.Indented);
-            File.WriteAllText("settings.json", newJSON);
+            File.WriteAllText(Data.settingsDir, newJSON);
 
             Data.Initiate();
         }
@@ -225,7 +225,7 @@ namespace Lucid_Hub
         {
             // save project list
             string newJSON = JsonConvert.SerializeObject(Data.projects, Formatting.Indented);
-            File.WriteAllText("projects.json", newJSON);
+            File.WriteAllText(Data.projectDir, newJSON);
 
             // save settings
             Settings settings = new Settings();
@@ -234,7 +234,7 @@ namespace Lucid_Hub
             settings.EditorPath = Code_Editor_Box.Text;
 
             newJSON = JsonConvert.SerializeObject(settings, Formatting.Indented);
-            File.WriteAllText("settings.json", newJSON);
+            File.WriteAllText(Data.settingsDir, newJSON);
         }
 
         private void Project_Dir_Box_TextChanged(object sender, TextChangedEventArgs e)
