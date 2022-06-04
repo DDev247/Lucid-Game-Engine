@@ -36,8 +36,9 @@ namespace LucidGE
         public class Scene
         {
             public string Name { get; set; }
-            //public List<StaticGameObject> Gameobjects = new List<StaticGameObject>();
-            public StaticGameObject[] Gameobjects = new StaticGameObject[0];
+            public List<StaticGameObject> Gameobjects = new List<StaticGameObject>();
+            //public StaticGameObject[] Gameobjects = new StaticGameObject[0];
+            public bool Activated { get; private set; }
 
             public static Scene GetScene(string filePath)
             {
@@ -47,8 +48,15 @@ namespace LucidGE
                 Scene returning = formatter.Deserialize(stream) as Scene;
                 stream.Close();
 
+                returning.Update();
+
                 Debug.Log("Engine.Scenes.Scene", $"Scene: '{returning.Name}' was loaded from: '{filePath}'");
                 return returning;
+            }
+
+            public Scene()
+            {
+                Update();
             }
 
             public void SaveScene(string filePath)
@@ -66,7 +74,29 @@ namespace LucidGE
 
             public void AddObject(StaticGameObject staticGameObject)
             {
-                Gameobjects.Append(staticGameObject);
+                Gameobjects.Add(staticGameObject);
+            }
+
+            private async Task Update()
+            {
+                while(true)
+                {
+                    if(Activated)
+                    {
+                        foreach (StaticGameObject gameObject in Gameobjects)
+                        {
+                            gameObject.Activated = true;
+                        }
+                    }
+                    else
+                    {
+                        foreach (StaticGameObject gameObject in Gameobjects)
+                        {
+                            gameObject.Activated = false;
+                        }
+                    }
+                    await Task.Delay(1);
+                }
             }
 
             /// <summary>
@@ -74,6 +104,8 @@ namespace LucidGE
             /// </summary>
             public void Activate()
             {
+                Activated = true;
+
                 foreach (StaticGameObject gameObject in Gameobjects)
                 {
                     gameObject.Activated = true;
@@ -85,6 +117,8 @@ namespace LucidGE
             /// </summary>
             public void Deactivate()
             {
+                Activated = false;
+
                 foreach (StaticGameObject gameObject in Gameobjects)
                 {
                     gameObject.Activated = false;

@@ -27,6 +27,8 @@ namespace LucidWrapper
         public static TextBox dllSubFolderName;
         public static TextBox customURL;
 
+        public bool closeAfterDown = false;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -61,7 +63,7 @@ namespace LucidWrapper
             }
         }
 
-        private void GoButton_Click(object sender, RoutedEventArgs e)
+        public void GoButton_Click(object sender, RoutedEventArgs e)
         {
             if(projectLocation.Text != "Project Location")
             {
@@ -140,8 +142,15 @@ namespace LucidWrapper
 
                                 await File.WriteAllBytesAsync(folder + @"\Lucid Game Engine.dll", downloaded);
 
-                                MessageBox.Show("Finished Downloading!", "Message");
-                                SaveCFG(false);
+                                if (closeAfterDown)
+                                {
+                                    Environment.Exit(0);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Finished Downloading!", "Message");
+                                    SaveCFG(false);
+                                }
                             }
                             else
                             {
@@ -158,8 +167,15 @@ namespace LucidWrapper
 
                                 await File.WriteAllBytesAsync(folder + @"\Lucid Game Engine.dll", downloaded);
 
-                                MessageBox.Show("Finished Downloading!", "Message");
-                                SaveCFG(false);
+                                if (closeAfterDown)
+                                {
+                                    Environment.Exit(0);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Finished Downloading!", "Message");
+                                    SaveCFG(false);
+                                }
                             }
                         }
                         else
@@ -189,8 +205,15 @@ namespace LucidWrapper
 
                                 await File.WriteAllBytesAsync(folder + @"\Lucid Game Engine.dll", downloaded);
 
-                                MessageBox.Show("Finished Downloading!", "Message");
-                                SaveCFG(false);
+                                if (closeAfterDown)
+                                {
+                                    Environment.Exit(0);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Finished Downloading!", "Message");
+                                    SaveCFG(false);
+                                }
                             }
                             else
                             {
@@ -207,8 +230,15 @@ namespace LucidWrapper
 
                                 await File.WriteAllBytesAsync(folder + @"\Lucid Game Engine.dll", downloaded);
 
-                                MessageBox.Show("Finished Downloading!", "Message");
-                                SaveCFG(false);
+                                if(closeAfterDown)
+                                {
+                                    Environment.Exit(0);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Finished Downloading!", "Message");
+                                    SaveCFG(false);
+                                }
                             }
                         }
                         else
@@ -241,8 +271,15 @@ namespace LucidWrapper
 
                                 await File.WriteAllBytesAsync(folder + @"\Lucid Game Engine.dll", downloaded);
 
-                                MessageBox.Show("Finished Downloading!", "Message");
-                                SaveCFG(false);
+                                if (closeAfterDown)
+                                {
+                                    Environment.Exit(0);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Finished Downloading!", "Message");
+                                    SaveCFG(false);
+                                }
                             }
                             else
                             {
@@ -259,8 +296,15 @@ namespace LucidWrapper
 
                                 await File.WriteAllBytesAsync(folder + @"\Lucid Game Engine.dll", downloaded);
 
-                                MessageBox.Show("Finished Downloading!", "Message");
-                                SaveCFG(false);
+                                if (closeAfterDown)
+                                {
+                                    Environment.Exit(0);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Finished Downloading!", "Message");
+                                    SaveCFG(false);
+                                }
                             }
                         }
                         else
@@ -290,8 +334,15 @@ namespace LucidWrapper
 
                                 await File.WriteAllBytesAsync(folder + @"\Lucid Game Engine.dll", downloaded);
 
-                                MessageBox.Show("Finished Downloading!", "Message");
-                                SaveCFG(false);
+                                if (closeAfterDown)
+                                {
+                                    Environment.Exit(0);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Finished Downloading!", "Message");
+                                    SaveCFG(false);
+                                }
                             }
                             else
                             {
@@ -308,8 +359,15 @@ namespace LucidWrapper
 
                                 await File.WriteAllBytesAsync(folder + @"\Lucid Game Engine.dll", downloaded);
 
-                                MessageBox.Show("Finished Downloading!", "Message");
-                                SaveCFG(false);
+                                if (closeAfterDown)
+                                {
+                                    Environment.Exit(0);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Finished Downloading!", "Message");
+                                    SaveCFG(false);
+                                }
                             }
                         }
                         else
@@ -325,6 +383,8 @@ namespace LucidWrapper
                 MessageBox.Show("Exception caught: " + ex.Message, "Error");
                 SaveCFG(true);
             }
+            if (closeAfterDown)
+                Environment.Exit(0);
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿{
   "mainCS": [
     "using System;",
-    "using System.Collections.Generic",
+    "using System.Collections.Generic;",
     "using System.Linq;",
     "using System.Text;",
     "using System.Threading.Tasks;",
@@ -33,9 +33,22 @@
     "        ",
     "        public MainWindow()",
     "        {",
-    "            InitializeComponent();",
-    "            MainInteraction.Initialize(this, mainGrid);",
-    "            Instance = this;",
+    "            try",
+    "            {",
+    "                InitializeComponent();",
+    "                ",
+    "                string[] fonts =",
+    "                {",
+    "                    \"Trebuchet MS\"",
+    "                };",
+    "                ",
+    "                MainInteraction.InitGE(this, mainGrid, fonts);",
+    "                Instance = this;",
+    "            }",
+    "            catch(Exception ex)",
+    "            {",
+    "                MainInteraction.CaughtException(ex);",
+    "            }",
     "        }",
     "    }",
     "}"
@@ -43,6 +56,48 @@
 
   "mainXAML": [
     "<Window x:Class=",
-    ""
+    "        xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation \"",
+    "        xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml \"",
+    "        xmlns:d=\"http://schemas.microsoft.com/expression/blend/2008 \"",
+    "        xmlns:mc=\"http://schemas.openxmlformats.org/markup-compatibility/2006 \"",
+    "        xmlns:local=\"clr-namespace:",
+    "        mc:Ignorable=\"d\"",
+    "        Title=\"MainWindow\" Width=\"1280\" Height=\"720\">",
+    "    <Grid x:Name=\"mainGrid\">",
+    "        ",
+    "    </Grid>",
+    "</Window>"
+  ],
+
+  "appCS": [
+    "using System;",
+    "using System.Collections.Generic;",
+    "using System.Configuration;",
+    "using System.Data;",
+    "using System.Linq;",
+    "using System.Threading.Tasks;",
+    "using System.Windows;",
+    "",
+    "namespace ",
+    "{",
+    "    /// <summary>",
+    "    /// Interaction logic for App.xaml",
+    "    /// </summary>",
+    "    public partial class App : Application",
+    "    {",
+    "    }",
+    "}"
+  ],
+
+  "appXAML": [
+    "<Application x:Class=",
+    "        xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"",
+    "        xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\"",
+    "        xmlns:local=\"clr-namespace:",
+    "        StartupUri=\"MainWindow.xaml\">",
+    "    <Application.Resources>",
+    "        ",
+    "    </Application.Resources>",
+    "</Application>"
   ]
 }

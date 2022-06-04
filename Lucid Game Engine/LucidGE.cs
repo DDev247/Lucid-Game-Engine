@@ -177,6 +177,7 @@ namespace LucidGE
             {
                 Debug.LogError("Engine.MainThread", "Exception caught: " + ex.Message);
                 InternalDebugger.Log("Engine.MainThread", 2, "Exception caught: " + ex.Message + " @ " + ex.StackTrace);
+                SaveLogs();
                 MessageBoxResult result = MessageBox.Show("Exception thrown: " + ex.Message + "\nThe situation may be unsafe, do you want to continue?", "Exception caught!", MessageBoxButton.YesNo, MessageBoxImage.Error);
 
                 if (result == MessageBoxResult.Yes)

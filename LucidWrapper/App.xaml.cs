@@ -13,5 +13,21 @@ namespace LucidWrapper
     /// </summary>
     public partial class App : Application
     {
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            MainWindow wnd = new MainWindow();
+            if (e.Args.Length > 0)
+            {
+                wnd.Hide();
+                wnd.ProjectLocationBox.Text = e.Args[0];
+                wnd.SubFolderNameBox.Text = "Lucid";
+                wnd.closeAfterDown = true;
+                wnd.GoButton_Click(this, null);
+            }
+            else
+            {
+                wnd.Show();
+            }
+        }
     }
 }

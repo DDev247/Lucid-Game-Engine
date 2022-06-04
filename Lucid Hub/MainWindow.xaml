@@ -3,10 +3,142 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:local="clr-namespace:Lucid_Hub"
         mc:Ignorable="d"
-        Title="MainWindow" Width="1280" Height="720">
+        Title="MainWindow" Width="1280" Height="720" ResizeMode="CanMinimize" Closing="Window_Closing">
     <Grid>
-        
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="1,0" StartPoint="0,1">
+                <GradientStop Color="#FF191919" Offset="0"/>
+                <GradientStop Color="#FF282828" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid x:Name="Sidebar">
+            <Grid.Effect>
+                <BlurEffect Radius="0"/>
+            </Grid.Effect>
+            <Rectangle HorizontalAlignment="Left" Width="355">
+                <Rectangle.Fill>
+                    <LinearGradientBrush EndPoint="0,1" StartPoint="1,0">
+                        <GradientStop Color="#FF2A1D2F"/>
+                        <GradientStop Color="#FF354E4B" Offset="1"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Label Content="Lucid Hub" HorizontalAlignment="Left" Height="133" VerticalAlignment="Top" Width="355" FontFamily="Verdana" FontSize="64" Foreground="White" FontWeight="Normal" FontStyle="Normal" HorizontalContentAlignment="Center"/>
+            <Label Content="Welcome back" HorizontalAlignment="Left" Height="75" VerticalAlignment="Top" Width="355" FontFamily="Verdana" FontSize="32" Foreground="#3FFFFFFF" FontWeight="Normal" FontStyle="Italic" HorizontalContentAlignment="Center" Margin="0,80,0,0" Background="Transparent"/>
+            <Label Content="What do you want to do?" HorizontalAlignment="Left" Height="75" VerticalAlignment="Top" Width="355" FontFamily="Verdana" FontSize="26" Foreground="#3FFFFFFF" FontWeight="Normal" FontStyle="Italic" HorizontalContentAlignment="Center" Margin="0,115,0,0" Background="Transparent"/>
+
+            <Button Content="Projects" Click="Projects_Click" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="60" Margin="10,190,0,0" VerticalAlignment="Top" Width="335" FontFamily="Verdana" FontSize="36" Foreground="White" BorderBrush="{x:Null}" Background="#4CDDDDDD" FontWeight="Bold">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Button Content="Settings" Click="Settings_Click" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="60" Margin="10,260,0,0" VerticalAlignment="Top" Width="335" FontFamily="Verdana" FontSize="36" Foreground="White" BorderBrush="{x:Null}" Background="#4CDDDDDD" FontWeight="Bold">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </Grid>
+        <Grid x:Name="Projects" d:IsHidden="True">
+            <Grid.Effect>
+                <BlurEffect Radius="0"/>
+            </Grid.Effect>
+            <Rectangle HorizontalAlignment="Left" Height="190" Margin="355,0,0,0" VerticalAlignment="Top" Width="925" Fill="#FF3C3C3C"/>
+            <Label Content="Projects" HorizontalAlignment="Left" Height="190" VerticalAlignment="Top" Width="405" Margin="360,0,0,0" FontSize="72" Foreground="White" FontFamily="Verdana"/>
+            <fa:ImageAwesome x:Name="Spinner" Icon="Spinner" Spin="True" SpinDuration="2" Height="64" Width="64" Margin="930,63,260,577" Foreground="White"/>
+            <Button Content="New Project" Click="NewProject_Click" HorizontalAlignment="Left" Height="75" Margin="1020,58,0,0" VerticalAlignment="Top" Width="230" Background="#FF61BAFF" Foreground="White" FontFamily="Verdana" FontSize="32">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="20"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Menu x:Name="ProjectMenu" Margin="360,190,0,0" Background="{x:Null}" Foreground="#FFE4E4E4" FontSize="24" FontFamily="Verdana" FontWeight="Bold">
+            </Menu>
+        </Grid>
+        <Grid x:Name="Settings" Visibility="Visible">
+            <Grid.Effect>
+                <BlurEffect Radius="0"/>
+            </Grid.Effect>
+            <Rectangle HorizontalAlignment="Left" Height="190" Margin="355,0,0,0" VerticalAlignment="Top" Width="925" Fill="#FF3C3C3C"/>
+            <Label Content="Settings" HorizontalAlignment="Left" Height="190" VerticalAlignment="Top" Width="405" Margin="360,0,0,0" FontSize="72" Foreground="White" FontFamily="Verdana"/>
+            <Label Content="Code Editor" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="915" FontFamily="Verdana" Foreground="White" FontSize="30" Margin="355,190,0,0"/>
+
+            <TextBox x:Name="Code_Editor_Box" HorizontalAlignment="Left" VerticalContentAlignment="Center" Margin="355,240,0,0" TextWrapping="Wrap" Text="C:\code.exe" VerticalAlignment="Top" Width="915" Height="50" FontFamily="Verdana" FontSize="24">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+
+            <Label Content="Launch directory instead of .csproj (vscode)" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="915" FontFamily="Verdana" Foreground="White" FontSize="30" Margin="355,290,0,0"/>
+            <ToggleButton x:Name="Launch_Toggle" Content="Yes/No" HorizontalAlignment="Left" Margin="360,340,0,0" VerticalAlignment="Top" Height="50" Width="200" FontFamily="Verdana" FontSize="24">
+                <ToggleButton.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </ToggleButton.Resources>
+            </ToggleButton>
+            <Button Content="Save" Click="Save_Click" HorizontalAlignment="Right" Margin="0,0,15,15" VerticalAlignment="Bottom" Height="60" Width="190" FontFamily="Verdana" FontSize="42">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </Grid>
+        <Grid x:Name="Create_New_Project">
+            <Grid x:Name="Create_New_Project_Content" Width="1000" Height="500">
+                <Rectangle HorizontalAlignment="Center" Height="500" Margin="0,0,0,0" VerticalAlignment="Center" Width="1000">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush EndPoint="0,1" StartPoint="1,0">
+                            <GradientStop Color="#FF373737"/>
+                            <GradientStop Color="#FF424242" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Label Content="Create a New project" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="70" Width="600" FontSize="48" FontFamily="Verdana" Foreground="White"/>
+                <Label Content="Name" HorizontalAlignment="Center" VerticalAlignment="Top" Width="1000" Margin="0,70,0,0" FontFamily="Verdana" FontSize="24" Foreground="#66FFFFFF" Height="40"/>
+                <TextBox x:Name="Project_Name_Box" HorizontalAlignment="Center" VerticalContentAlignment="Center" Margin="0,110,0,0" TextWrapping="Wrap" Text="MyProject" VerticalAlignment="Top" Width="1000" Height="50" FontSize="24" FontFamily="Verdana">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+                <Label Content="Directory" HorizontalAlignment="Center" VerticalAlignment="Top" Width="1000" Margin="0,160,0,0" FontFamily="Verdana" FontSize="24" Foreground="#66FFFFFF" Height="40"/>
+                <TextBox x:Name="Project_Dir_Box" TextChanged="Project_Dir_Box_TextChanged" HorizontalAlignment="Center" VerticalContentAlignment="Center" Margin="0,200,0,0" TextWrapping="Wrap" Text="C:\projects" VerticalAlignment="Top" Width="1000" Height="50" FontSize="24" FontFamily="Verdana">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+                <Label Content="Destination:" HorizontalAlignment="Center" VerticalAlignment="Top" Width="1000" Margin="0,250,0,0" FontFamily="Verdana" FontSize="24" Foreground="#66FFFFFF" Height="40"/>
+                <Label x:Name="Project_Dest_Label" Content="destcode" HorizontalAlignment="Center" VerticalAlignment="Top" Width="1000" Margin="0,290,0,0" FontFamily="Verdana" FontSize="24" Foreground="White" Height="40"/>
+                <Button Content="Create" Click="Proj_Create_Click" HorizontalAlignment="Right" Margin="0,0,15,15" VerticalAlignment="Bottom" Height="60" Width="190" Background="#FF61BAFF" Foreground="White" FontFamily="Verdana" FontSize="42" FontWeight="Normal">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Content="Cancel" Click="Proj_Cancel_Click" HorizontalAlignment="Right" Margin="0,0,215,15" VerticalAlignment="Bottom" Height="60" Width="190" Background="#FFDDDDDD" Foreground="Black" FontFamily="Verdana" FontSize="42" FontWeight="Normal">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>
