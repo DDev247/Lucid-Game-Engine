@@ -123,7 +123,7 @@ namespace Lucid_Hub
                     string fname = dirs[dirs.Length - 1] + ".csproj";
                     process.StartInfo.FileName = Data.settings.EditorPath;
                     process.StartInfo.UseShellExecute = true;
-                    process.StartInfo.Arguments = '"' + dir + fname + '"';
+                    process.StartInfo.Arguments = '"' + dir + @"\" + fname + '"';
                 }
 
                 process.Start();
