@@ -245,15 +245,10 @@ namespace Lucid_Hub
 
         private void Update_Click(object sender, RoutedEventArgs e)
         {
-            string[] dirs = Environment.CurrentDirectory.Split('/', '\\');
-            string path = ""; 
+            File.Delete(Environment.CurrentDirectory + @"..\last.json");
 
-            for(int i = 0; i < dirs.Length-2; i++) 
-            { 
-                path += dirs[i];
-            }
+            Process.Start(Environment.CurrentDirectory + @"..\LucidHubUpdater.exe");
 
-            File.Delete(path + @"\last.json");
             Environment.Exit(0);
         }
     }
