@@ -61,7 +61,7 @@ namespace Lucid_Hub
                 foreach (string proj in Data.projects.ProjectList)
                 {
                     MenuItem item = new MenuItem();
-                    item.Header = proj + "\n";
+                    item.Header = proj;
                     item.Click += MenuItem_Click;
                     item.Cursor = Cursors.Hand;
 
