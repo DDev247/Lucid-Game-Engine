@@ -94,7 +94,21 @@
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button Content="Update Hub" Click="Update_Click" HorizontalAlignment="Right" Margin="0,0,215,15" VerticalAlignment="Bottom" Height="60" Width="263" FontFamily="Verdana" FontSize="42">
+            <Button Content="Update Hub" Visibility="Collapsed" HorizontalAlignment="Right" Margin="0,0,215,15" VerticalAlignment="Bottom" Height="60" Width="263" FontFamily="Verdana" FontSize="42" BorderBrush="#BF707070" Foreground="#BF000000" Background="#BFDDDDDD">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Content="Open Appdata" Click="Appdata_Click" HorizontalAlignment="Right" Margin="0,0,215,15" VerticalAlignment="Bottom" Height="60" Width="311" FontFamily="Verdana" FontSize="42">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Content="Delete Projects" Click="Delete_Click" HorizontalAlignment="Right" Margin="0,0,536,15" VerticalAlignment="Bottom" Height="60" Width="330" FontFamily="Verdana" FontSize="42">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="10"/>
@@ -146,6 +160,52 @@
                     </Button.Resources>
                 </Button>
                 <fa:ImageAwesome x:Name="Spinner_Proj" Icon="Spinner" Spin="True" SpinDuration="2" Height="64" Width="64" Margin="0,0,425,15" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+            </Grid>
+        </Grid>
+        <Grid x:Name="Delete_Project" d:IsHidden="True">
+            <Grid x:Name="Delete_Project_Content" Width="1000" Height="500">
+                <Rectangle HorizontalAlignment="Center" Height="500" Margin="0,0,0,0" VerticalAlignment="Center" Width="1000">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush EndPoint="0,1" StartPoint="1,0">
+                            <GradientStop Color="#FF373737"/>
+                            <GradientStop Color="#FF424242" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Label Content="Create a New project" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="70" Width="600" FontSize="48" FontFamily="Verdana" Foreground="White"/>
+                <Label Content="Name" HorizontalAlignment="Center" VerticalAlignment="Top" Width="1000" Margin="0,70,0,0" FontFamily="Verdana" FontSize="24" Foreground="#66FFFFFF" Height="40"/>
+                <TextBox x:Name="Project_Name_Box1" HorizontalAlignment="Center" VerticalContentAlignment="Center" Margin="0,110,0,0" TextWrapping="Wrap" Text="MyProject" VerticalAlignment="Top" Width="1000" Height="50" FontSize="24" FontFamily="Verdana">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+                <Label Content="Directory" HorizontalAlignment="Center" VerticalAlignment="Top" Width="1000" Margin="0,160,0,0" FontFamily="Verdana" FontSize="24" Foreground="#66FFFFFF" Height="40"/>
+                <TextBox x:Name="Project_Dir_Box1" HorizontalAlignment="Center" VerticalContentAlignment="Center" Margin="0,200,0,0" TextWrapping="Wrap" Text="C:\projects" VerticalAlignment="Top" Width="1000" Height="50" FontSize="24" FontFamily="Verdana">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+                <Label Content="Destination:" HorizontalAlignment="Center" VerticalAlignment="Top" Width="1000" Margin="0,250,0,0" FontFamily="Verdana" FontSize="24" Foreground="#66FFFFFF" Height="40"/>
+                <Label x:Name="Project_Dest_Label1" Content="destcode" HorizontalAlignment="Center" VerticalAlignment="Top" Width="1000" Margin="0,290,0,0" FontFamily="Verdana" FontSize="24" Foreground="White" Height="40"/>
+                <Button Content="Delete" Click="Proj_Delete_Click" HorizontalAlignment="Right" Margin="0,0,15,15" VerticalAlignment="Bottom" Height="60" Width="190" Background="#FF61BAFF" Foreground="White" FontFamily="Verdana" FontSize="42" FontWeight="Normal">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Content="Cancel" Click="Delete_Cancel_Click" HorizontalAlignment="Right" Margin="0,0,215,15" VerticalAlignment="Bottom" Height="60" Width="190" Background="#FFDDDDDD" Foreground="Black" FontFamily="Verdana" FontSize="42" FontWeight="Normal">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <fa:ImageAwesome x:Name="Spinner_Proj1" Icon="Spinner" Spin="True" SpinDuration="2" Height="64" Width="64" Margin="0,0,425,15" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
             </Grid>
         </Grid>
     </Grid>

@@ -36,8 +36,10 @@ namespace Lucid_Hub
             Settings.Visibility = Visibility.Collapsed;
 
             Create_New_Project.Visibility = Visibility.Collapsed;
+            Delete_Project.Visibility = Visibility.Collapsed;
             Spinner.Visibility = Visibility.Collapsed;
             Spinner_Proj.Visibility = Visibility.Collapsed;
+            Spinner_Proj1.Visibility = Visibility.Collapsed;
 
             BlurEffect blr = Sidebar.Effect as BlurEffect;
             BlurEffect blr1 = Projects.Effect as BlurEffect;
@@ -49,6 +51,7 @@ namespace Lucid_Hub
             Code_Editor_Box.Text = Data.settings.EditorPath;
             Launch_Toggle.IsChecked = Data.settings.LaunchDir;
             Project_Dir_Box.Text = Data.settings.SaveProjectDir;
+            Project_Dir_Box1.Text = Data.settings.SaveProjectDir;
 
             UpdateThings();
         }
@@ -57,15 +60,17 @@ namespace Lucid_Hub
         {
             while(true)
             {
-                // proj menu
+                // proj menu  
                 ProjectMenu.Items.Clear();
 
                 foreach (string proj in Data.projects.ProjectList)
                 {
                     MenuItem item = new MenuItem();
                     item.Header = proj;
-                    item.Click += MenuItem_Click;
                     item.Cursor = Cursors.Hand;
+                    item.VerticalContentAlignment = VerticalAlignment.Center;
+                    item.HorizontalContentAlignment = HorizontalAlignment.Left;
+                    item.Click += MenuItem_Click;
 
                     ProjectMenu.Items.Add(item);
                 }
@@ -75,6 +80,9 @@ namespace Lucid_Hub
 
                 // proj create shit
                 Project_Dest_Label.Content = Data.settings.SaveProjectDir + @"\" + Project_Name_Box.Text;
+
+                // proj delete shit
+                Project_Dest_Label1.Content = Project_Dir_Box1.Text + @"\" + Project_Name_Box1.Text;
 
                 await Task.Delay(1);
             }
@@ -144,6 +152,65 @@ namespace Lucid_Hub
             MenuItem item = sender as MenuItem;
             string dir = item.Header.ToString();
             LaunchProject(dir);
+        }
+
+        #region DELETE PROJECT SCREEN
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            Blur();
+            Delete_Project.Visibility = Visibility.Visible;
+        }
+
+        private void Delete_Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            UnBlur();
+            Delete_Project.Visibility = Visibility.Collapsed;
+        }
+
+        private void Proj_Delete_Click(object sender, RoutedEventArgs e)
+        {
+            string dir = Project_Dir_Box1.Text + @"\" + Project_Name_Box1.Text;
+            if (Data.projects.ProjectList.Contains(dir))
+            {
+                DeleteProject(dir);
+            }
+            else
+            {
+                MessageBoxResult result = MessageBox.Show($"The project with the path:\n{dir}\nDoesn't exist. If it isn't on the project list press Yes otherwise press No", "Lucid Hub Error", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if(result == MessageBoxResult.Yes)
+                {
+                    DeleteProject(dir);
+                }
+            }
+        }
+
+        private async Task DeleteProject(string directory)
+        {
+            if (Directory.Exists(directory))
+            {
+                Spinner_Proj1.Visibility = Visibility.Visible;
+                Directory.Delete(directory, true);
+
+                while (Directory.Exists(directory))
+                    await Task.Delay(10);
+
+                Spinner_Proj1.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                MessageBox.Show($"The project with the directory:\n{directory}\nDoesn't exist.", "Lucid Hub Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        #endregion
+
+        private void MenuItem_DeleteClick(object sender, RoutedEventArgs e)
+        {
+            MenuItem item = sender as MenuItem;
+
+            string dir = item.Header.ToString();
+            DeleteProject(dir);
         }
 
         private void NewProject_Click(object sender, RoutedEventArgs e)
@@ -251,6 +318,18 @@ namespace Lucid_Hub
             Process.Start(Environment.CurrentDirectory + @"..\LucidHubUpdater.exe");
 
             Environment.Exit(0);
+        }
+
+        private void Appdata_Click(object sender, RoutedEventArgs e)
+        {
+            using(Process process = new Process())
+            {
+                process.StartInfo.FileName = "explorer.exe";
+                process.StartInfo.Arguments = Environment.GetEnvironmentVariable("appdata") + @"\Lucid_Hub\";
+                Debug.WriteLine(process.StartInfo.Arguments);
+
+                process.Start();
+            }
         }
     }
 
