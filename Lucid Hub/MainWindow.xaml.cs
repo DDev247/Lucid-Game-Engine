@@ -464,10 +464,11 @@ namespace Lucid_Hub
 
                 Directory.CreateDirectory(path + @"\bin"); // <--      create the output folder for compilation
                 Directory.CreateDirectory(path + @"\bin\COPY"); // <-- create sub directory to bin
-                Directory.CreateDirectory(path + @"\bin\COPY\data");
-                Directory.CreateDirectory(path + @"\bin\COPY\sound");
-                Directory.CreateDirectory(path + @"\bin\COPY\sprites");
-                await File.WriteAllTextAsync(path + @"\bin\COPY\settings.json", SettingsJson);
+                Directory.CreateDirectory(path + @"\bin\COPY\assets");
+                Directory.CreateDirectory(path + @"\bin\COPY\assets\data");
+                Directory.CreateDirectory(path + @"\bin\COPY\assets\sound");
+                Directory.CreateDirectory(path + @"\bin\COPY\assets\sprites");
+                await File.WriteAllTextAsync(path + @"\bin\COPY\assets\settings.json", SettingsJson);
 
                 await File.WriteAllTextAsync(path + "MainWindow.xaml", XAMLFile);
                 await File.WriteAllTextAsync(path + "MainWindow.xaml.cs", CSFile);
