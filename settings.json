@@ -3,5 +3,7 @@
   "project-name": "Example Project",
   "height": 600,
   "width": 800,
-  "can-be-resized": false
+  "can-be-resized": false,
+  "discord-id": "",
+  "debugger": true
 }

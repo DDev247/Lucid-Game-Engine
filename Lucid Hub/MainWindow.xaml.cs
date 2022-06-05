@@ -18,6 +18,7 @@ using System.IO;
 using System.IO.Compression;
 using Newtonsoft.Json;
 using System.Diagnostics;
+using System.Net;
 
 namespace Lucid_Hub
 {
@@ -255,6 +256,8 @@ namespace Lucid_Hub
 
     public static class Data
     {
+        public const string settingsJsonAddress = "https://raw.githubusercontent.com/DDev247/Lucid-Game-Engine/main/settings.json";
+
         public static string savedProjectDir = "";
 
         public static string settingsDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Lucid_Hub\settings.json";
@@ -428,6 +431,23 @@ namespace Lucid_Hub
 
                 string ASMFile = File.ReadAllText(Directory.GetCurrentDirectory() + @"\templates\AssemblyInfo.cs");
 
+                // VERY IMPORTANT!
+                // Download settings
+                string SettingsJson = "";
+                using (WebClient client = new WebClient())
+                {
+                    SettingsJson = await client.DownloadStringTaskAsync(new Uri(Data.settingsJsonAddress));
+                    client.Dispose();
+                }
+
+                // Basic folder structure:
+                // net6.0-windows>
+                //     >assets
+                //         >data
+                //         >sprites
+                //         >sound
+                //         -settings.json
+
                 // Write all things
                 if (!Directory.Exists(dir))
                     Directory.CreateDirectory(dir);
@@ -437,7 +457,17 @@ namespace Lucid_Hub
                     Directory.CreateDirectory(dir + @"\" + pName);
                 }
 
+                // Create basic assets structure
+                // cd {dir}/bin/COPY/ <-- create there
+
                 string path = dir + @"\" + pName + @"\";
+
+                Directory.CreateDirectory(path + @"\bin"); // <--      create the output folder for compilation
+                Directory.CreateDirectory(path + @"\bin\COPY"); // <-- create sub directory to bin
+                Directory.CreateDirectory(path + @"\bin\COPY\data");
+                Directory.CreateDirectory(path + @"\bin\COPY\sound");
+                Directory.CreateDirectory(path + @"\bin\COPY\sprites");
+                await File.WriteAllTextAsync(path + @"\bin\COPY\settings.json", SettingsJson);
 
                 await File.WriteAllTextAsync(path + "MainWindow.xaml", XAMLFile);
                 await File.WriteAllTextAsync(path + "MainWindow.xaml.cs", CSFile);
