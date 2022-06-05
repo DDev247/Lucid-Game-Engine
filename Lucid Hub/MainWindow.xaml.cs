@@ -192,12 +192,14 @@ namespace Lucid_Hub
                 Spinner_Proj1.Visibility = Visibility.Visible;
                 Directory.Delete(directory, true);
 
+                await Task.Delay(250);
                 while (Directory.Exists(directory))
-                    await Task.Delay(10);
+                    await Task.Delay(100);
 
                 Spinner_Proj1.Visibility = Visibility.Collapsed;
                 Data.projects.ProjectList.Remove(directory);
                 Delete_Project.Visibility=Visibility.Collapsed;
+                UnBlur();
             }
             else
             {
