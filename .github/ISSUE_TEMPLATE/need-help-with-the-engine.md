@@ -2,7 +2,7 @@
 name: Need help with the engine
 about: Use when you need help with the engine.
 title: ''
-labels: help wanted, question
+labels: engine, help wanted, question
 assignees: ''
 
 ---

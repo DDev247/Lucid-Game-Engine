@@ -2,7 +2,7 @@
 name: Bug report
 about: Create a report to help us improve
 title: Bug
-labels: bug
+labels: bug, enhancement
 assignees: ''
 
 ---
@@ -27,7 +27,6 @@ If applicable, add screenshots to help explain your problem.
 
 **Desktop (please complete the following information):**
  - OS: [e.g. iOS]
- - Version [e.g. 22]
  - Game engine version (if you are using the engine e.g. making your project)
 
 **Logfile**
