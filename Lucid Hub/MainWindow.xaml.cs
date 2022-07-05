@@ -37,9 +37,11 @@ namespace Lucid_Hub
 
             Create_New_Project.Visibility = Visibility.Collapsed;
             Delete_Project.Visibility = Visibility.Collapsed;
+            Update_Project.Visibility = Visibility.Collapsed;
             Spinner.Visibility = Visibility.Collapsed;
             Spinner_Proj.Visibility = Visibility.Collapsed;
             Spinner_Proj1.Visibility = Visibility.Collapsed;
+            Spinner_Proj2.Visibility = Visibility.Collapsed;
 
             BlurEffect blr = Sidebar.Effect as BlurEffect;
             BlurEffect blr1 = Projects.Effect as BlurEffect;
@@ -83,6 +85,9 @@ namespace Lucid_Hub
 
                 // proj delete shit
                 Project_Dest_Label1.Content = Project_Dir_Box1.Text + @"\" + Project_Name_Box1.Text;
+
+                // proj update shit
+                Project_Dest_Label2.Content = Project_Dir_Box2.Text + @"\" + Project_Name_Box2.Text;
 
                 await Task.Delay(1);
             }
@@ -307,6 +312,10 @@ namespace Lucid_Hub
 
             newJSON = JsonConvert.SerializeObject(settings, Formatting.Indented);
             File.WriteAllText(Data.settingsDir, newJSON);
+
+            // delete lucid dll
+            File.Delete(Environment.CurrentDirectory + @"\Lucid\Lucid Game Engine.dll");
+            Directory.Delete(Environment.CurrentDirectory + @"\Lucid");
         }
 
         private void Project_Dir_Box_TextChanged(object sender, TextChangedEventArgs e)
@@ -335,6 +344,74 @@ namespace Lucid_Hub
                 process.Start();
             }
         }
+
+        private void UpdateProject_Click(object sender, RoutedEventArgs e)
+        {
+            Blur();
+            Update_Project.Visibility = Visibility.Visible;
+            Spinner_Proj.Visibility = Visibility.Visible;
+        }
+
+        private void Updt_Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            UnBlur();
+            Update_Project.Visibility = Visibility.Collapsed;
+            Spinner_Proj.Visibility = Visibility.Collapsed;
+        }
+
+        private async void Updt_Click(object sender, RoutedEventArgs e)
+        {
+            Spinner_Proj2.Visibility = Visibility.Visible;
+            string path = Data.GetProjectDir(Project_Dest_Label2.Content.ToString());
+
+            // Run Wrapper
+            using (Process process = new Process())
+            {
+                process.StartInfo.FileName = "Lucid Wrapper.exe";
+                process.StartInfo.UseShellExecute = true;
+                process.StartInfo.Arguments = '"' + path + '"';
+
+                process.Start();
+
+                await process.WaitForExitAsync();
+            }
+
+            Spinner_Proj2.Visibility = Visibility.Collapsed;
+
+            Spinner_Proj.Visibility = Visibility.Collapsed;
+            Update_Project.Visibility = Visibility.Collapsed;
+            UnBlur();
+        }
+
+        private async void Updt_All_Click(object sender, RoutedEventArgs e)
+        {
+            Spinner_Proj2.Visibility = Visibility.Visible;
+
+            // Run Wrapper
+            using (Process process = new Process())
+            {
+                process.StartInfo.FileName = "Lucid Wrapper.exe";
+                process.StartInfo.UseShellExecute = true;
+                process.StartInfo.Arguments = '"' + Environment.CurrentDirectory + '"';
+
+                process.Start();
+
+                await process.WaitForExitAsync();
+            }
+
+            foreach(string item in Data.projects.ProjectList)
+            {
+                // Copy
+                string path = item + @"\Lucid\Lucid Game Engine.dll";
+                File.Copy(Environment.CurrentDirectory + @"\Lucid\Lucid Game Engine.dll", path, true);
+            }
+
+            Spinner_Proj2.Visibility = Visibility.Collapsed;
+
+            Spinner_Proj.Visibility = Visibility.Collapsed;
+            Update_Project.Visibility = Visibility.Collapsed;
+            UnBlur();
+        }
     }
 
     public static class Data
@@ -349,6 +426,20 @@ namespace Lucid_Hub
         public static Settings settings;
 
         public static Projects projects;
+
+        public static string GetProjectDir(string name)
+        {
+            string result = "";
+            foreach(string item in projects.ProjectList)
+            {
+                if(item.Contains(name))
+                {
+                    result = item;
+                    break;
+                }
+            }
+            return result;
+        }
 
         public static async Task Initiate()
         {
@@ -573,7 +664,7 @@ namespace Lucid_Hub
                 {
                     process.StartInfo.FileName = "Lucid Wrapper.exe";
                     process.StartInfo.UseShellExecute = true;
-                    process.StartInfo.Arguments = path;
+                    process.StartInfo.Arguments = '"' + path + '"';
 
                     process.Start();
 
